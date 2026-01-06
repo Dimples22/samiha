@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games | The Simulacrum</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="games.js" defer></script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-container">
+    <div class="logo">Samiha</div>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="section">
+  <div class="grid">
+    <div style="grid-column: span 12; text-align: center;">
+
+      <p>Enter the secret word (in all caps) from your copy of <strong>The Simulacrum</strong> to unlock the puzzles:</p>
+      <p>Hint: What was the name used to address a key figure in the book?</p>
+      <input type="text" id="keyInput" placeholder="Enter secret word">
+      <button class="btn" id="unlockBtn">Unlock Puzzles</button>
+
+      <div id="puzzles" style="margin-top: 40px; display: none;">
+        <h3>Puzzle 1</h3>
+        <p>Solve this riddle based on Chapter 1...</p>
+
+        <h3>Puzzle 2: Crossword</h3>
+        <p>Fill in the crossword based on the themes of the book:</p>
+
+        <div id="crossword-container" class="crossword-container">
+          <div class="crossword-grid">
+            <div class="cell" data-letter="A" data-number="1">
+                <input type="text" maxlength="1">
+                <span class="cell-number">1</span>
+            </div>
+
+            <!-- Row 1 -->
+            <div class="cell number" data-letter="A" data-number="1">1</div>
+            <div class="cell" data-letter="L"></div>
+            <div class="cell number" data-letter="I" data-number="2">2</div>
+            <div class="cell" data-letter="E"></div>
+            <div class="cell" data-letter="N"></div>
+            <div class="cell number" data-letter="A" data-number="4">4</div>
+            <div class="cell" data-letter="T"></div>
+            <div class="cell" data-letter="I"></div>
+            <div class="cell" data-letter="O"></div>
+            <div class="cell" data-letter="N"></div>
+            <div class="cell"></div>
+            <div class="cell"></div>
+
+            <!-- Row 2 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="N"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 3 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="T"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 4 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="R"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 5 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="O"></div>
+            <div class="cell" data-letter="A"></div><div class="cell" data-letter="N"></div>
+            <div class="cell" data-letter="X"></div><div class="cell" data-letter="I"></div>
+            <div class="cell" data-letter="E"></div><div class="cell" data-letter="T"></div>
+            <div class="cell" data-letter="Y"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 6 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="S"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 7 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="P"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 8 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="E"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="R"></div>
+            <div class="cell" data-letter="E"></div><div class="cell" data-letter="S"></div>
+            <div class="cell" data-letter="I"></div><div class="cell" data-letter="L"></div>
+            <div class="cell" data-letter="I"></div><div class="cell"></div>
+
+            <!-- Row 9 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="C"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell" data-letter="E"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 10 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="T"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 11 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="I"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+            <div class="cell"></div><div class="cell"></div><div class="cell"></div>
+
+            <!-- Row 12 -->
+            <div class="cell"></div><div class="cell"></div><div class="cell" data-letter="V"></div>
+            <div class="cell"></div><div class="cell" data-letter="P"></div>
+            <div class="cell" data-letter="R"></div><div class="cell" data-letter="O"></div>
+            <div class="cell" data-letter="C"></div><div class="cell" data-letter="R"></div>
+            <div class="cell" data-letter="A"></div><div class="cell" data-letter="S"></div><div class="cell"></div>
+          </div>
+
+          <div class="crossword-clues">
+            <div class="clues-across">
+              <h4>Across</h4>
+              <ul>
+                <li>1. Being isolated from society (10)</li>
+                <li>3. A feeling of worry or unease (7)</li>
+                <li>5. Ability to recover from difficulties (10)</li>
+                <li>7. Delaying tasks despite knowing consequences (14)</li>
+              </ul>
+            </div>
+            <div class="clues-down">
+              <h4>Down</h4>
+              <ul>
+                <li>2. Reflecting deeply on oneself (13)</li>
+                <li>4. Complete loss of hope (7)</li>
+                <li>6. Deep sorrow, especially from loss (5)</li>
+              </ul>
+            </div>
+          </div>
+
+          <button id="checkCrosswordBtn" class="btn">Check Answers</button>
+          <p id="crosswordResult"></p>
+        </div>
+      </div>
+
+      <p id="errorMsg" style="color: var(--accent); margin-top: 20px;"></p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 Samiha. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

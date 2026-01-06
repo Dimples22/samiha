@@ -4,66 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Simulacrum | Samiha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
 
-<header class="hero">
-    <img src="banner.png" alt="Samiha Banner" class="hero-banner">
-    <div class="hero-content">
-        <h1>Hello. I'm Samiha</h1>
-        <p>Author of <span class="highlight">The Simulacrum</span></p>
+<header class="hero section">
+  <div class="grid">
+    <div class="hero-content" style="grid-column: span 12;">
+      <h1>Hello. I'm Samiha</h1>
+      <p>Author of <span class="highlight">The Simulacrum</span></p>
     </div>
+  </div>
 </header>
 
 <nav class="nav">
   <div class="nav-container">
     <div class="logo">Samiha</div>
-    <button class="nav-toggle" id="nav-toggle">
+
+    <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <ul class="nav-links" id="nav-links">
+
+    <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#book">Book</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="games.html">Games</a></li>
     </ul>
   </div>
 </nav>
 
 <main>
-  <section id="about" class="container">
-    <h2>About Me</h2>
-    <p>It’s hard to sum up who I am in one paragraph. My book is about my life and what has made me who I am, yet I am someone who is constantly evolving, constantly experiencing. I wrote The Simulacrum because it felt like a long time coming. Writing is the one way I can take the time to articulate my thoughts, and this book is everything I’ve been keeping inside.</p>
-    <p>I believed that if no one could understand me, then maybe this could help them. Most people will never know what it is like to have a complicated childhood that seeps into the smallest parts of your day-to-day life. They might never stop to think that perhaps the little girl who was mute in school was mute for a reason. I hope my book can offer comfort to those who understand these feelings and awareness to those who may not so they might see a little more, think a little deeper, and be a little more mindful.</p>
-  </section>
-
-  <section id="book" class="container">
-    <h2>My Book</h2>
-    <div class="book-card">
-      <img src="Screenshot 2026-01-05 174706.png" alt="The Simulacrum Cover">
-      <div class="book-info">
-        <h3>The Simulacrum</h3>
-        <p>Blending fiction with lived experience, The Simulacrum belongs to the genre of autofiction, a form that blurs the boundaries between autobiography and imagination. Rather than following a traditional plot, it turns inward, tracing the protagonist’s inner world: her disintegration, her tentative reconstruction, and her philosophical reckonings with selfhood, love, and loss. Episodic, confessional, and deeply introspective, this book is a work that lingers on questions rather than answers; it is an invitation for readers to step into another consciousness and perhaps find parallels in their own.</p>
-        <a href="https://a.co/d/iBkjmmC" class="btn" target="_blank">Buy Now</a>
+  <section id="about" class="section">
+    <div class="grid">
+      <div style="grid-column: span 12;">
+        <h2>About Me</h2>
+        <p>
+          It’s hard to sum up who I am in one paragraph. My book is about my life and what has made me who I am, yet I am someone who is constantly evolving, constantly experiencing. I wrote The Simulacrum because it felt like a long time coming. Writing is the one way I can take the time to articulate my thoughts, and this book is everything I’ve been keeping inside.
+        </p>
+        <p>
+          I believed that if no one could understand me, then maybe this could help them. Most people will never know what it is like to have a complicated childhood that seeps into the smallest parts of your day-to-day life. They might never stop to think that perhaps the little girl who was mute in school was mute for a reason. I hope my book can offer comfort to those who understand these feelings and awareness to those who may not so they might see a little more, think a little deeper, and be a little more mindful.
+        </p>
       </div>
     </div>
   </section>
 
-  <section id="contact" class="container">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:ssamiha.h24@outlook.com">ssamiha.h24@outlook.com</a></p>
-    <p>Follow me on social media: 
-        <a href="https://www.instagram.com/sami_ha707/" target="_blank">Instagram</a>
-    </p>
+  <section id="book" class="section">
+    <div class="grid">
+      <div style="grid-column: span 12;">
+        <h2>My Book</h2>
+      </div>
+      <div class="book-card" style="grid-column: span 12;">
+        <img src="images/book-cover.png" alt="The Simulacrum book cover">
+        <div class="book-info">
+          <h3>The Simulacrum</h3>
+          <p>
+            Blending fiction with lived experience, The Simulacrum belongs to the genre of autofiction, a form that blurs the boundaries between autobiography and imagination. Rather than following a traditional plot, it turns inward, tracing the protagonist’s inner world: her disintegration, her tentative reconstruction, and her philosophical reckonings with selfhood, love, and loss. Episodic, confessional, and deeply introspective, this book lingers on questions rather than answers.
+          </p>
+          <a href="https://a.co/d/iBkjmmC" class="btn" target="_blank" rel="noopener">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="grid">
+      <div style="grid-column: span 12;">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:ssamiha.h24@outlook.com">ssamiha.h24@outlook.com</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/sami_ha707/" target="_blank" rel="noopener">sami_ha707</a></p>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>
   <p>© 2026 Samiha. All rights reserved.</p>
 </footer>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('active');
+  });
+</script>
 
 </body>
 </html>

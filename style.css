@@ -5,6 +5,11 @@
 }
 
 :root {
+  --fs-xl: clamp(2.5rem, 5vw, 4rem);
+  --fs-lg: 1.5rem;
+  --fs-md: 1.1rem;
+  --fs-sm: 0.9rem;
+
   --dark-bg: #0d0d0d;
   --dark-gray: #1a1a1a;
   --primary: #306bac;
@@ -21,46 +26,21 @@ body {
   background: var(--dark-bg);
 }
 
-h1, h2, h3 { line-height: 1.2; }
-h1 { font-size: clamp(2rem, 5vw, 3rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1rem; }
-h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); margin-bottom: 0.5rem; }
-p { font-size: clamp(1rem, 2.5vw, 1.125rem); margin-bottom: 1rem; }
+h1 { font-size: var(--fs-xl); line-height: 1.2; }
+h2 { font-size: var(--fs-lg); line-height: 1.3; margin-bottom: 1rem; }
+h3 { font-size: var(--fs-md); margin-bottom: 0.5rem; }
+p { font-size: var(--fs-md); margin-bottom: 1rem; }
 a { color: var(--secondary); text-decoration: none; }
+small { font-size: var(--fs-sm); }
 
-.hero {
-  position: relative;
-  text-align: center;
-  margin-bottom: 40px;
-}
+.section { padding: 80px 20px; }
 
-.hero-banner {
-  width: 100%;
-  max-height: 250px;
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
-}
-
-.hero-content {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--text-light);
-}
-
-.hero-content h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-}
-
-.hero-content p {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  color: var(--text-light);
-}
-
-.hero .highlight {
-  color: var(--text-light);
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .nav {
@@ -71,28 +51,38 @@ a { color: var(--secondary); text-decoration: none; }
 }
 
 .nav-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   padding: 10px 20px;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo { font-weight: bold; font-size: 1.5rem; }
 
 .nav-links {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 15px;
   list-style: none;
-  gap: 20px;
 }
 
 .nav-links li a {
+  display: block;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--dark-bg);
+  text-align: center;
   font-weight: bold;
-  transition: color var(--transition-speed);
+  transition: background var(--transition-speed), color var(--transition-speed);
 }
 
-.nav-links li a:hover { color: var(--accent); }
+.nav-links li a:hover {
+  background: var(--primary);
+  color: var(--text-light);
+}
 
 .nav-toggle {
   display: none;
@@ -114,49 +104,75 @@ a { color: var(--secondary); text-decoration: none; }
   transition: all 0.3s ease;
 }
 
-.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
-
-.book-card {
-  display: flex;
-  gap: 30px; 
-  align-items: stretch;
-  margin-top: 20px;
-  background: var(--dark-gray);
-  padding: 20px;
-  border-radius: 8px;
-  flex-wrap: wrap;
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
 }
 
-.book-card img {
-  width: 300px; 
-  height: 100%;
-  object-fit: cover;
-  border: 4px solid var(--primary);
-  border-radius: 6px;
-  flex-shrink: 0; 
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+  pointer-events: none;
 }
 
-.book-info {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1; 
+.hero-content {
+  position: relative;
+  color: var(--text-light);
+  text-align: center;
+  padding: 0 10px;
 }
 
 .btn {
   display: inline-block;
-  padding: 0.75rem 1.25rem;
+  padding: 0.5rem 1rem;
   background: var(--primary);
   color: var(--text-light);
   border-radius: 4px;
   font-weight: bold;
+  font-size: var(--fs-sm);
   transition: transform var(--transition-speed), background var(--transition-speed);
 }
 
 .btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
   background: var(--accent);
 }
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 40px;
+}
+
+.book-card {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 20px;
+  background: var(--dark-gray);
+  padding: 15px;
+  border-radius: 8px;
+  align-items: start;
+}
+
+.book-card img {
+  width: 200px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 4px solid var(--primary);
+}
+
+.book-info {
+  display: grid;
+  gap: 10px;
+}
+
+.hero-image { display: none; }
 
 footer {
   background: var(--dark-gray);
@@ -169,7 +185,7 @@ footer {
 
 @media (max-width: 768px) {
   .nav-links {
-    flex-direction: column;
+    grid-auto-flow: row;
     display: none;
     gap: 10px;
     background: var(--dark-gray);
@@ -179,23 +195,81 @@ footer {
     width: 180px;
     padding: 10px;
     border-radius: 6px;
-    transition: all 0.3s ease;
   }
 
-  .nav-links.active { display: flex; }
+  .nav-links.active { display: grid; }
   .nav-toggle { display: flex; }
+
+  .grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
-  .book-card { 
-    flex-direction: column;
-    align-items: center;
-  }
+  .book-card { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 10px; }
+}
+  
 
-  .book-card img {
-    width: 90%;
-    height: auto; 
-  }
+.crossword-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 40px);
+  grid-auto-rows: 40px;
+  gap: 2px;
+}
 
-  .book-info { width: 100%; }
+.cell {
+  position: relative;
+  border: 1px solid var(--secondary);
+  background: var(--dark-gray);
+}
+
+.cell input {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+}
+
+.cell-number {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  font-size: 0.6rem;
+  color: var(--secondary);
+}
+.crossword-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cell.number::before {
+  content: attr(data-number);
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  font-size: 0.6rem;
+  color: var(--accent);
+}
+
+.crossword-clues {
+  max-width: 300px;
+}
+
+.crossword-clues h4 {
+  margin-bottom: 5px;
+}
+
+.crossword-clues ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.crossword-clues li {
+  margin-bottom: 8px;
 }
