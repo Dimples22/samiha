@@ -15,21 +15,24 @@
 </header>
 
 <div class="categories">
-  <button class="active" onclick="showCategory('social', this)">Social Issues</button>
+  <button class="active" onclick="showCategory('social')">Social Issues</button>
+  <button onclick="showCategory('history')">History</button>
 </div>
 
 <div class="articles">
-
   <div class="article-card social">
     <h3>The Divide of Gen Z</h3>
-    <p>
-      An analysis of political polarisation, gender equality, and modern dating
-      culture within Gen Z.
-    </p>
+    <p>An analysis of political polarisation, gender equality, and modern dating culture within Gen Z.</p>
     <p><small>Published Jul 27, 2025</small></p>
     <a href="the-divide-of-genz.html">Read article</a>
   </div>
 
+  <div class="article-card history">
+    <h3>The Genocide and Ethnic Cleansing of Palestine</h3>
+    <p>An in-depth look at the Nakba, ethnic cleansing, and ongoing struggles of Palestinians.</p>
+    <p><small>Published Jul 31, 2025</small></p>
+    <a href="the-genocide-palestine.html">Read article</a>
+  </div>
 </div>
 
 <script>
@@ -50,3 +53,4 @@ document.addEventListener("DOMContentLoaded", () => showCategory('social', docum
 
 </body>
 </html>
+
