@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="article.css">
+  <title>Blog</title>
+</head>
+<body>
+
+<header class="blog-header">
+  <h1>Blog</h1>
+  <p>Select a category</p>
+</header>
+
+<div class="categories">
+  <button class="active" onclick="showCategory('social', this)">Social Issues</button>
+</div>
+
+<div class="articles">
+
+  <div class="article-card social">
+    <h3>The Divide of Gen Z</h3>
+    <p>
+      An analysis of political polarisation, gender equality, and modern dating
+      culture within Gen Z.
+    </p>
+    <p><small>Published Jul 27, 2025</small></p>
+    <a href="the-divide-of-genz.html">Read article</a>
+  </div>
+
+</div>
+
+<script>
+function showCategory(category, button) {
+  const cards = document.querySelectorAll('.article-card');
+  const buttons = document.querySelectorAll('.categories button');
+
+  cards.forEach(card => {
+    card.style.display = card.classList.contains(category) ? 'flex' : 'none';
+  });
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  if(button) button.classList.add('active');
+}
+
+document.addEventListener("DOMContentLoaded", () => showCategory('social', document.querySelector('.categories button.active')));
+</script>
+
+</body>
+</html>

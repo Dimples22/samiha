@@ -1,0 +1,251 @@
+:root {
+  --fs-xl: clamp(2.5rem, 5vw, 4rem);
+  --fs-lg: 1.5rem;
+  --fs-md: 1.1rem;
+  --fs-sm: 0.9rem;
+
+  --dark-bg: #0d0d0d;
+  --dark-gray: #1a1a1a;
+  --primary: #306bac;
+  --secondary: #6f9ceb;
+  --accent: #918ef4;
+  --text-light: #f0f0f0;
+  --transition-speed: 0.3s;
+}
+
+.article-page {
+  background: var(--dark-bg);
+  padding: 60px 16px;
+}
+
+.article {
+  background: #ffffff;
+  color: #111;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(48, 107, 172, 0.15);
+}
+
+.article-tag {
+  display: inline-block;
+  background: var(--secondary);
+  color: #fff;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: var(--fs-sm);
+  margin-bottom: 1rem;
+}
+
+.article h1 {
+  font-size: var(--fs-xl);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: #111;
+}
+
+.article-meta {
+  font-size: var(--fs-sm);
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.article h2 {
+  font-size: var(--fs-lg);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.article p {
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.article a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.article a:hover {
+  color: var(--accent);
+}
+
+.references {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--secondary);
+}
+
+.references li {
+  font-size: var(--fs-sm);
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.blog-page {
+  padding: 40px 16px;
+}
+
+.blog-header {
+  text-align: center;
+  padding: 30px 20px;
+  margin-bottom: 20px;
+}
+
+.blog-header h1 {
+  font-size: var(--fs-xl);
+  color: var(--text-light);
+  margin: 0;
+}
+
+.blog-header p {
+  margin-top: 10px;
+  color: var(--text-light);
+  font-size: var(--fs-md);
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 15px 0;
+}
+
+.categories button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  background: var(--dark-gray);
+  color: var(--text-light);
+  transition: background var(--transition-speed), color var(--transition-speed);
+}
+
+.categories button.active,
+.categories button:hover {
+  background: var(--primary);
+  color: var(--text-light);
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.article-card {
+  background: var(--dark-gray);
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  font-size: 0.95rem;
+}
+
+.article-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+.article-card img {
+  width: 100%;
+  height: 140px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  object-fit: cover;
+}
+
+.article-card h3 {
+  margin: 0 0 8px 0;
+  color: var(--text-light);
+}
+
+.article-card p {
+  color: #ccc;
+  flex-grow: 1;
+}
+
+.article-card a {
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 8px;
+  display: inline-block;
+  color: var(--primary);
+}
+
+.article-card a:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 1024px) {
+  .articles {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .article-page {
+    padding: 50px 12px;
+  }
+
+  .article {
+    padding: 2rem 1.5rem;
+  }
+
+  .article h1 {
+    font-size: 2.2rem;
+  }
+
+  .articles {
+    gap: 14px;
+  }
+
+  .article-card {
+    padding: 14px;
+  }
+
+  .categories {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .article {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .article h1 {
+    font-size: 1.9rem;
+  }
+
+  .article p {
+    font-size: 1rem;
+  }
+
+  .article-card {
+    padding: 12px;
+  }
+}
+
+.article-page .nav,
+.article-page .nav-links li a,
+.article-page .nav-links li a:hover {
+  background: var(--dark-gray) !important;
+  color: var(--text-light) !important;
+}
+
+.article-page .nav-links li a:hover {
+  background: var(--dark-gray) !important;
+  color: var(--secondary) !important;
+}
