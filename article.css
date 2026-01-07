@@ -249,3 +249,21 @@
   background: var(--dark-gray) !important;
   color: var(--secondary) !important;
 }
+
+.back-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: #fff !important;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  transition: transform var(--transition-speed), background var(--transition-speed), color var(--transition-speed);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  background: var(--accent);
+  color: #fff !important;
+}
