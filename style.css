@@ -274,19 +274,21 @@ footer {
   margin-bottom: 8px;
 }
 
+.banner-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .banner-video {
-  width: 100%;
+  width: 90%;
   max-width: 800px;
   height: auto;
   display: block;
-  margin: 20px auto 0 auto;
+  margin: 0 auto;
+  border-radius: 8px;
 }
 
 .category-message {
-  text-align: center;
-  margin-top: 20px;
+  margin-top: 15px;
   font-size: 1.2rem;
 }
-
-
-
