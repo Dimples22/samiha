@@ -279,8 +279,14 @@ footer {
   max-width: 800px;
   height: auto;
   display: block;
-  margin: 0 auto;
-  border-radius: 8px;
+  margin: 20px auto 0 auto;
 }
+
+.category-message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
 
 
