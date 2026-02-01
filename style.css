@@ -306,3 +306,68 @@ footer {
   margin: 0 auto;
   border-radius: 8px;
 }
+
+.photobook {
+  padding: 80px 20px;
+}
+
+.photo-flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-flow img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  background: var(--dark-gray);
+}
+
+.photo-flow figcaption {
+  margin-top: 0.6rem;
+  font-size: var(--fs-sm);
+  color: #aaa;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+}
+
+.photo-bottom-video {
+  width: 100px; 
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.3)
+}
+
+.photo-bottom-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-flow img:hover {
+  opacity: 0.92;
+}
+
+@media (max-width: 768px) {
+  .photo-flow {
+    gap: 40px;
+  }
+
+  .photo-flow figure {
+    max-width: 100%;
+  }
+}
+
