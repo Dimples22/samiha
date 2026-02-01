@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Photos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .photo-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-bottom {
+      width: 100%;
+      margin-top: 6px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, #ffc1cc 0%, #a8dadc 50%, #b39cd0 100%);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-container">
+      <div class="logo">Samiha</div>
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#why-work">Why Work With Me</a></li>
+        <li><a href="index.html#book">Book</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="photobook">
+    <div class="photo-flow">
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 172018.png" alt="">
+        <figcaption>17/01/2026</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 174633.png" alt="">
+        <figcaption>20/11/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 174617.png" alt="">
+        <figcaption>20/11/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 174602.png" alt="">
+        <figcaption>20/11/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 175139.png" alt="">
+        <figcaption>20/11/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 172259.png" alt="">
+        <figcaption>28/10/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 172448.png" alt="">
+        <figcaption>21/10/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 173041.png" alt="">
+        <figcaption>24/04/2025</figcaption>
+      </figure>
+
+      <figure class="photo-card">
+        <img src="images/Screenshot 2026-02-01 172952.png" alt="">
+        <figcaption>16/05/2025</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+<script>
+window.addEventListener("load", () => {
+  const cards = document.querySelectorAll(".photo-card");
+  let stickers = [
+    "videos/Untitled design (1).mp4",
+    "videos/Untitled design.mp4",
+    "videos/big1.mp4",
+    "videos/big2.mp4",
+    "videos/wow.mp4",
+    "videos/cool.mp4"
+  ];
+
+  stickers = stickers.sort(() => Math.random() - 0.5);
+
+  cards.forEach((card, index) => {
+    const videoWrapper = document.createElement("div");
+    videoWrapper.className = "photo-bottom-video";
+
+    const video = document.createElement("video");
+    const sticker = stickers[index % stickers.length];
+    video.src = sticker;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+
+    videoWrapper.appendChild(video);
+
+ 
+    if (sticker === "videos/big1.mp4" || sticker === "videos/big2.mp4") {
+      videoWrapper.style.width = "300px";
+      videoWrapper.style.height = "190px";
+      videoWrapper.style.borderRadius = "12px";
+    } else {
+      videoWrapper.style.width = "100px";
+      videoWrapper.style.height = "100px";
+      videoWrapper.style.borderRadius = "50%"; 
+    }
+
+    videoWrapper.style.marginTop = "16px"; 
+    card.insertBefore(videoWrapper, card.querySelector("figcaption"));
+  });
+});
+</script>
+
+
+
+
+</body>
+</html>
