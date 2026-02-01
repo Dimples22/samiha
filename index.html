@@ -9,8 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7011005908068222"
-     crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -26,15 +24,14 @@
 <nav class="nav">
   <div class="nav-container">
     <div class="logo">Samiha</div>
-
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span>
       <span></span>
       <span></span>
     </button>
-
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
+      <li><a href="#why-work">Why Work With Me</a></li>
       <li><a href="#book">Book</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="games.html">Games</a></li>
@@ -44,7 +41,8 @@
 </nav>
 
 <main>
-  <section id="about" class="section">
+
+  <section id="about" class="section card">
     <div class="grid">
       <div style="grid-column: span 12;">
         <h2>About Me</h2>
@@ -58,19 +56,18 @@
     </div>
   </section>
 
-  <section id="why-work" class="section">
-  <div class="grid">
-    <div style="grid-column: span 12;">
-      <h2>Why Work With Me</h2>
-      <p>
-        I put in the work instead of taking the easy way because I trust myself and know I can do better. I am almost a jack of all trades, interested in writing, drawing, coding, leading, content creation, designing, and more, and I am adaptable and learn fast. I am more passionate than most, and when I want to do something, I do it instead of procrastinating. I am independent and use my free time to grow my skills and knowledge, always pushing myself to improve and take on new challenges.
-      </p>
+  <section id="why-work" class="section card">
+    <div class="grid">
+      <div style="grid-column: span 12;">
+        <h2>Why Work With Me</h2>
+        <p>
+          I put in the work instead of taking the easy way because I trust myself and know I can do better. I am almost a jack of all trades, interested in writing, drawing, coding, leading, content creation, designing, and more, and I am adaptable and learn fast. I am more passionate than most, and when I want to do something, I do it instead of procrastinating. I am independent and use my free time to grow my skills and knowledge, always pushing myself to improve and take on new challenges.
+        </p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-
-  <section id="book" class="section">
+  <section id="book" class="section card">
     <div class="grid">
       <div style="grid-column: span 12;">
         <h2>My Book</h2>
@@ -88,7 +85,7 @@
     </div>
   </section>
 
-  <section id="contact" class="section">
+  <section id="contact" class="section card">
     <div class="grid">
       <div style="grid-column: span 12;">
         <h2>Contact</h2>
@@ -97,16 +94,18 @@
       </div>
     </div>
   </section>
-  <section id="support" class="support-section">
-    <div class="support-card">
-      <h2>Support Me</h2>
-      <p>If you like my work and want to help me keep creating, you can buy me a coffee. Every contribution matters!</p>
-      <a href="https://buymeacoffee.com/samiha.org" target="_blank" class="support-btn">☕ Buy Me a Coffee</a>
+
+  <section id="support" class="section card">
+    <div class="grid">
+      <div style="grid-column: span 12;">
+        <h2>Support Me</h2>
+        <p>If you like my work and want to help me keep creating, you can buy me a coffee. Every contribution matters!</p>
+        <a href="https://buymeacoffee.com/samiha.org" target="_blank" class="support-btn">☕ Buy Me a Coffee</a>
+      </div>
     </div>
   </section>
-</main>
 
-  
+</main>
 
 <footer>
   <p>© 2026 Samiha. All rights reserved.</p>
@@ -115,7 +114,6 @@
 <script>
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
-
   toggle.addEventListener('click', () => {
     links.classList.toggle('active');
   });
@@ -123,7 +121,3 @@
 
 </body>
 </html>
-
-
-
-
