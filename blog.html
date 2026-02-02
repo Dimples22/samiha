@@ -43,8 +43,9 @@
 </section>
 
 <div class="categories">
-  <button class="active" onclick="showCategory('social')">Social Issues</button>
-  <button onclick="showCategory('history')">History</button>
+  <button type="button" onclick="showCategory('personal', this)">Personal Essays</button>
+  <button type="button" class="active" onclick="showCategory('social', this)">Social Issues</button>
+  <button type="button" onclick="showCategory('history', this)">History</button>
 </div>
 
 <div class="articles">
@@ -67,6 +68,13 @@
     <p>Details the Nakba and the impact on Palestinians over time.</p>
     <p><small>Published 31 Jul 2025</small></p>
     <a href="the-genocide-palestine.html" class="article-btn">Read article</a>
+  </div>
+
+  <div class="article-card personal">
+    <h3>The Version Of Me People Have Never Met</h3>
+    <p>A personal reflection on being misunderstood and the versions of ourselves people may never see.</p>
+    <p><small>Published 02 Jan 2026</small></p>
+    <a href="versions.html" class="article-btn">Read article</a>
   </div>
 
   <div class="article-card social">
@@ -95,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => showCategory('social', docum
 
 </body>
 </html>
+
 
 
 
