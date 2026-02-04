@@ -3,106 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="article.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7011005908068222"
-     crossorigin="anonymous"></script>
+
+  <script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7011005908068222"
+    crossorigin="anonymous">
+  </script>
+
   <title>Blog</title>
 </head>
+
 <body>
 
-<header class="blog-header">
-  <nav class="nav">
-    <div class="nav-container">
-      <div class="logo">Samiha's Blog</div>
-      <button class="nav-toggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <header class="blog-header">
+    <nav class="nav">
+      <div class="nav-container">
+        <div class="logo">Samiha's Blog</div>
 
-      <ul class="nav-links">
-        <li><a href="index.html#about">About</a></li>
-        <li><a href="index.html#why-work">Why Work With Me</a></li>
-        <li><a href="index.html#book">Book</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="index.html#games">Games</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="photos.html">Photobook</a></li>
-      </ul>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul class="nav-links">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#why-work">Why Work With Me</a></li>
+          <li><a href="index.html#book">Book</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+          <li><a href="index.html#games">Games</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="photos.html">Photobook</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <section class="banner-section">
+    <video class="banner-video" autoplay muted loop playsinline>
+      <source src="videos/welcome-banner.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <p class="category-message">Select a category!</p>
+  </section>
+
+  <div class="categories">
+    <button type="button" onclick="showCategory('personal', this)">
+      Personal Essays
+    </button>
+    <button
+      type="button"
+      class="active"
+      onclick="showCategory('social', this)">
+      Social Issues
+    </button>
+    <button type="button" onclick="showCategory('history', this)">
+      History
+    </button>
+  </div>
+
+  <div class="articles">
+    <div class="article-card social">
+      <h3>The Divide of Gen Z</h3>
+      <p>Explains why Generation Z is divided on politics, gender, and dating.</p>
+      <p><small>Published 27 Jul 2025</small></p>
+      <a href="the-divide-of-genz.html" class="article-btn">Read article</a>
     </div>
-  </nav>
-</header>
 
-<section class="banner-section">
-  <video class="banner-video" autoplay muted loop playsinline>
-    <source src="videos/welcome-banner.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <p class="category-message">Select a category!</p>
-</section>
+    <div class="article-card social">
+      <h3>Why Being Apolitical Is Actually Harming You</h3>
+      <p>Shows why avoiding politics can affect your life and community.</p>
+      <p><small>Published 11 Jan 2026</small></p>
+      <a href="being-apolitical-harming.html" class="article-btn">Read article</a>
+    </div>
 
-<div class="categories">
-  <button type="button" onclick="showCategory('personal', this)">Personal Essays</button>
-  <button type="button" class="active" onclick="showCategory('social', this)">Social Issues</button>
-  <button type="button" onclick="showCategory('history', this)">History</button>
-</div>
+    <div class="article-card history">
+      <h3>The Genocide and Ethnic Cleansing of Palestine</h3>
+      <p>Details the Nakba and the impact on Palestinians over time.</p>
+      <p><small>Published 31 Jul 2025</small></p>
+      <a href="the-genocide-palestine.html" class="article-btn">Read article</a>
+    </div>
 
-<div class="articles">
-  <div class="article-card social">
-    <h3>The Divide of Gen Z</h3>
-    <p>Explains why Generation Z is divided on politics, gender, and dating.</p>
-    <p><small>Published 27 Jul 2025</small></p>
-    <a href="the-divide-of-genz.html" class="article-btn">Read article</a>
+    <div class="article-card personal">
+      <h3>The Version Of Me People Have Never Met</h3>
+      <p>
+        A personal reflection on being misunderstood and the versions of
+        ourselves people may never see.
+      </p>
+      <p><small>Published 02 Jan 2026</small></p>
+      <a href="versions.html" class="article-btn">Read article</a>
+    </div>
+
+    <div class="article-card social">
+      <h3>How You Can Help the Planet</h3>
+      <p>Practical tips on reducing plastic use and helping the environment.</p>
+      <p><small>Published 15 Jan 2025</small></p>
+      <a href="help-the-planet.html" class="article-btn">Read article</a>
+    </div>
   </div>
 
-  <div class="article-card social">
-    <h3>Why Being Apolitical Is Actually Harming You</h3>
-    <p>Shows why avoiding politics can affect your life and community.</p>
-    <p><small>Published 11 Jan 2026</small></p>
-    <a href="being-apolitical-harming.html" class="article-btn">Read article</a>
-  </div>
+  <script>
+    window.addEventListener("load", () => {
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelector(".nav-links");
 
-  <div class="article-card history">
-    <h3>The Genocide and Ethnic Cleansing of Palestine</h3>
-    <p>Details the Nakba and the impact on Palestinians over time.</p>
-    <p><small>Published 31 Jul 2025</small></p>
-    <a href="the-genocide-palestine.html" class="article-btn">Read article</a>
-  </div>
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", () => {
+          navLinks.classList.toggle("active");
+        });
+      }
 
-  <div class="article-card personal">
-    <h3>The Version Of Me People Have Never Met</h3>
-    <p>A personal reflection on being misunderstood and the versions of ourselves people may never see.</p>
-    <p><small>Published 02 Jan 2026</small></p>
-    <a href="versions.html" class="article-btn">Read article</a>
-  </div>
+      function showCategory(category, button) {
+        const cards = document.querySelectorAll(".article-card");
+        const buttons = document.querySelectorAll(".categories button");
 
-  <div class="article-card social">
-    <h3>How You Can Help the Planet</h3>
-    <p>Practical tips on reducing plastic use and helping the environment.</p>
-    <p><small>Published 15 Jan 2025</small></p>
-    <a href="help-the-planet.html" class="article-btn">Read article</a>
-  </div>
-</div>
+        cards.forEach(card => {
+          card.style.display = card.classList.contains(category)
+            ? "flex"
+            : "none";
+        });
 
-<script>
-function showCategory(category, button) {
-  const cards = document.querySelectorAll('.article-card');
-  const buttons = document.querySelectorAll('.categories button');
+        buttons.forEach(btn => btn.classList.remove("active"));
+        if (button) button.classList.add("active");
+      }
 
-  cards.forEach(card => {
-    card.style.display = card.classList.contains(category) ? 'flex' : 'none';
-  });
-
-  buttons.forEach(btn => btn.classList.remove('active'));
-  if(button) button.classList.add('active');
-}
-
-document.addEventListener("DOMContentLoaded", () => showCategory('social', document.querySelector('.categories button.active')));
-</script>
+      showCategory(
+        "social",
+        document.querySelector(".categories button.active")
+      );
+    });
+  </script>
 
 </body>
 </html>
+
 
 
 
