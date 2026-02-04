@@ -94,7 +94,16 @@
   </section>
 
 <script>
-window.addEventListener("load", () => {
+ window.addEventListener("load", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  }
+  
   const cards = document.querySelectorAll(".photo-card");
   let stickers = [
     "videos/Untitled design (1).mp4",
@@ -143,4 +152,5 @@ window.addEventListener("load", () => {
 
 </body>
 </html>
+
 
