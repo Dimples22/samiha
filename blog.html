@@ -55,12 +55,14 @@
     <button type="button" onclick="showCategory('personal', this)">
       Personal Essays
     </button>
+
     <button
       type="button"
       class="active"
       onclick="showCategory('social', this)">
       Social Issues
     </button>
+
     <button type="button" onclick="showCategory('history', this)">
       History
     </button>
@@ -107,6 +109,20 @@
   </div>
 
   <script>
+    function showCategory(category, button) {
+      const cards = document.querySelectorAll(".article-card");
+      const buttons = document.querySelectorAll(".categories button");
+
+      cards.forEach(card => {
+        card.style.display = card.classList.contains(category)
+          ? "flex"
+          : "none";
+      });
+
+      buttons.forEach(btn => btn.classList.remove("active"));
+      if (button) button.classList.add("active");
+    }
+
     window.addEventListener("load", () => {
       const navToggle = document.querySelector(".nav-toggle");
       const navLinks = document.querySelector(".nav-links");
@@ -115,20 +131,6 @@
         navToggle.addEventListener("click", () => {
           navLinks.classList.toggle("active");
         });
-      }
-
-      function showCategory(category, button) {
-        const cards = document.querySelectorAll(".article-card");
-        const buttons = document.querySelectorAll(".categories button");
-
-        cards.forEach(card => {
-          card.style.display = card.classList.contains(category)
-            ? "flex"
-            : "none";
-        });
-
-        buttons.forEach(btn => btn.classList.remove("active"));
-        if (button) button.classList.add("active");
       }
 
       showCategory(
@@ -140,9 +142,6 @@
 
 </body>
 </html>
-
-
-
 
 
 
