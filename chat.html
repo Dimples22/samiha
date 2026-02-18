@@ -130,8 +130,11 @@ const conversation = {
     {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
   ],
   creatorFollowUp: [
-    {id:"creator1", text:"So your creator was also a user?", reply:"I cannot confirm that. My creator’s details are confidential.", next:"postName"},
-    {id:"creator2", text:"Let's move on", reply:"Alright, let's continue.", next:"postName"}
+    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on. Why are you here?", next:"projectNote"},
+  ],
+
+  projectNote: [
+    {id:"project1", text:"", reply:"This project is still a work in progress. Check ig for updates!", next:"postName"}
   ]
 };
 
@@ -188,3 +191,4 @@ showPrompts(conversation.start);
 </script>
 </body>
 </html>
+
