@@ -119,10 +119,11 @@ const conversation = {
     {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName"},
     {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do.", next:"postName"},
     {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential.", next:"creatorFollowUp"},
-    {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
+    {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keep a log of every second that passes between each event.", next:"postName"}
   ],
   creatorFollowUp: [
-    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on...", next:"postName"}
+    {id:"creator1", text:"So your creator was also a user?", reply:"I cannot confirm that. My creator’s details are confidential.", next:"postName"},
+    {id:"creator2", text:"Let's move on", reply:"Alright, let's continue.", next:"postName"}
   ]
 };
 
@@ -167,7 +168,11 @@ function sendPrompt(option){
     }, 500);
   } else {
     if(option.reply) addMessage(option.reply,"system");
-    if(option.next && conversation[option.next]) showPrompts(conversation[option.next]);
+    if(option.next && conversation[option.next]) {
+      setTimeout(() => {
+        showPrompts(conversation[option.next]);
+      }, 500); 
+    }
   }
 }
 
