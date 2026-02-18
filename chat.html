@@ -21,22 +21,27 @@ body {
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: center; 
-  align-items: center;      
+  justify-content: center;
+  align-items: center;
   text-align: center;
   background-color: #ffcc00;
   color: #4d3a4b;
   font-weight: bold;
-  padding: 12px;
+  padding: 12px 10px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   border: 2px solid #f8c8d3;
   z-index: 1000;
   font-size: 1rem;
   box-sizing: border-box;
+  word-wrap: break-word; 
 }
 @media (max-width: 480px) {
-  .warning-message { font-size: 0.9rem; padding: 10px 5px; }
+  .warning-message {
+    font-size: 0.9rem;
+    padding: 10px 8px;
+  }
 }
+
 .chatbox-container {
   width: 90%;
   max-width: 450px;
@@ -183,5 +188,6 @@ showPrompts(conversation.start);
 </script>
 </body>
 </html>
+
 
 
