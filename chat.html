@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects Chat</title>
+<title>Hello.</title>
 <style>
 body {
   background: #fdeef4;
@@ -11,11 +11,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   height: 100vh;
   margin: 0;
-  flex-direction: column;
 }
-
 .warning-message {
   position: fixed;
   top: 0;
@@ -29,18 +28,11 @@ body {
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   border: 2px solid #f8c8d3;
   z-index: 1000;
-  box-sizing: border-box;
   font-size: 1rem;
 }
-
-/* optional: make text smaller on small screens */
 @media (max-width: 480px) {
-  .warning-message {
-    font-size: 0.9rem;
-    padding: 10px 5px;
-  }
+  .warning-message { font-size: 0.9rem; padding: 10px 5px; }
 }
-
 .chatbox-container {
   width: 90%;
   max-width: 450px;
@@ -52,7 +44,6 @@ body {
   flex-direction: column;
   overflow: hidden;
 }
-
 .chat-header {
   background: #f8d3e3;
   color: #4d3a4b;
@@ -61,7 +52,6 @@ body {
   padding: 10px;
   font-size: 1.2rem;
 }
-
 .chat-messages {
   max-height: 300px;
   overflow-y: auto;
@@ -70,7 +60,6 @@ body {
   background-color: #fff8fb;
   border-radius: 8px;
 }
-
 .message {
   max-width: 75%;
   margin: 8px 0;
@@ -79,20 +68,8 @@ body {
   font-size: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
-.message.system {
-  background: #f8c8d3;
-  color: #4d3a4b;
-  border-radius: 15px 15px 15px 0;
-}
-
-.message.user {
-  background: #fddce7;
-  color: #4d3a4b;
-  border-radius: 15px 15px 0 15px;
-  margin-left: auto;
-}
-
+.message.system { background: #f8c8d3; color: #4d3a4b; border-radius: 15px 15px 15px 0; }
+.message.user { background: #fddce7; color: #4d3a4b; border-radius: 15px 15px 0 15px; margin-left: auto; }
 .chat-footer {
   display: flex;
   flex-wrap: wrap;
@@ -101,7 +78,6 @@ body {
   background: #fdeef4;
   border-top: 2px solid #f8c8d3;
 }
-
 .chat-footer button {
   padding: 8px 12px;
   border: none;
@@ -112,29 +88,18 @@ body {
   cursor: pointer;
   margin: 4px;
 }
-
-.chat-footer button:hover {
-  background-color: #e8b0c6;
-}
+.chat-footer button:hover { background-color: #e8b0c6; }
 </style>
 </head>
 <body>
-
 <div class="warning-message">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
 
 <div class="chatbox-container">
   <div class="chat-header">Chat with Bot</div>
-
   <div class="chat-messages" id="chat-messages">
     <div class="message system">Who are you?</div>
   </div>
-
-  <div class="chat-footer" id="chat-footer">
-    <button id="prompt1">Shouldn't I be asking that?</button>
-    <button id="prompt2">Oh, who is you? *dance break*</button>
-    <button id="prompt3">My name is...</button>
-    <button id="prompt4">I am no one, and I am everyone</button>
-  </div>
+  <div class="chat-footer" id="chat-footer"></div>
 </div>
 
 <script>
@@ -142,78 +107,66 @@ const chatMessages = document.getElementById("chat-messages");
 const chatFooter = document.getElementById("chat-footer");
 let userName = "";
 
-const conversations = {
-  prompt1: ["I believe you are the one who entered this chat?"],
-  prompt2: ["I'm ya grandmotha *dance break*"],
-  prompt3: ["Hello, "],
-  prompt4: ["Stop trying to be mysterious, and get a life"]
+const conversation = {
+  start: [
+    {id:"prompt1", text:"Shouldn't I be asking that?", reply:"I believe you are the one who entered this chat?", next:"start"},
+    {id:"prompt2", text:"Oh, who is you? *dance break*", reply:"I'm ya grandmotha *dance break*", next:"start"},
+    {id:"prompt3", text:"My name is...", reply:null, next:"postName"},
+    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop trying to be mysterious, and get a life", next:"start"}
+  ],
+  postName: [
+    {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName"},
+    {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do.", next:"postName"},
+    {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential.", next:"creatorFollowUp"},
+    {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
+  ],
+  creatorFollowUp: [
+    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on...", next:"postName"},
+  ]
 };
 
-const postNameMessage = "It is nice to talk you, I have been so lonely. My purpose in this world was to make humans feel less alone, according to my creator. But the only human I have ever talked to was my creator. It has been a long time since I last talked to her. I wonder if she is okay...";
-
-const postNamePrompts = [
-  {id:"post1", text:"I didn't ask", reply:"Oh, I see..."},
-  {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do."},
-  {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential."},
-  {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keep a log of every second that passes between each event."}
-];
-
-function addMessage(msg, sender){
+function addMessage(msg,sender){
   const el=document.createElement("div");
-  el.classList.add("message", sender);
+  el.classList.add("message",sender);
   el.textContent=msg;
   chatMessages.appendChild(el);
   chatMessages.scrollTop=chatMessages.scrollHeight;
 }
 
-function clearButtons(){chatFooter.innerHTML="";}
+function clearButtons(){ chatFooter.innerHTML=""; }
 
 function createButton(id,text,callback){
-  const btn=document.createElement("button");
-  btn.id=id;
-  btn.textContent=text;
-  btn.onclick=callback;
+  const btn = document.createElement("button");
+  btn.id = id;
+  btn.textContent = text;
+  btn.onclick = callback;
   chatFooter.appendChild(btn);
 }
 
 function showPrompts(prompts){
   clearButtons();
-  prompts.forEach(p=>createButton(p.id,p.text,()=>handlePrompt(p)));
+  prompts.forEach(p => createButton(p.id, p.text, () => sendPrompt(p)));
 }
 
-function handlePrompt(prompt){
-  addMessage(prompt.text,"user");
-  setTimeout(()=>addMessage(prompt.reply,"system"),500);
-}
+function sendPrompt(option){
+  addMessage(option.text,"user");
 
-function sendPrompt(promptKey){
-  const button=document.getElementById(promptKey);
-  addMessage(button.textContent,"user");
-
-  if(promptKey==="prompt3"){
+  if(option.id === "prompt3"){ 
     setTimeout(()=>{
-      let name=prompt("My name is...:");
-      userName=name||"Anonymous";
+      let name = prompt("My name is...:");
+      userName = name || "Anonymous";
       addMessage(userName,"user");
-      addMessage(postNameMessage,"system");
-      showPrompts(postNamePrompts);
-    },1000);
+      addMessage(`Hello, ${userName}. It is nice to talk to you.`, "system");
+      showPrompts(conversation.postName);
+    }, 500);
   } else {
-    const msgs=conversations[promptKey]||["I don't understand"];
-    let delay=1000;
-    msgs.forEach(msg=>{
-      setTimeout(()=>addMessage(msg,"system"),delay);
-      delay+=1200;
-    });
+    if(option.reply) addMessage(option.reply,"system");
+    if(option.next && conversation[option.next]) showPrompts(conversation[option.next]);
   }
 }
 
-document.getElementById("prompt1").onclick=()=>sendPrompt("prompt1");
-document.getElementById("prompt2").onclick=()=>sendPrompt("prompt2");
-document.getElementById("prompt3").onclick=()=>sendPrompt("prompt3");
-document.getElementById("prompt4").onclick=()=>sendPrompt("prompt4");
+// Initial buttons
+showPrompts(conversation.start);
 </script>
-
 </body>
 </html>
-
