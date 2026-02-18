@@ -9,38 +9,32 @@ body {
   background: #fdeef4;
   font-family: 'Verdana', sans-serif;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  height: 100vh;
+  align-items: center;
   margin: 0;
+  padding-top: 80px;
 }
+
 .warning-message {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   text-align: center;
   background-color: #ffcc00;
   color: #4d3a4b;
   font-weight: bold;
-  padding: 12px 10px;
+  padding: 12px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   border: 2px solid #f8c8d3;
   z-index: 1000;
   font-size: 1rem;
-  box-sizing: border-box;
-  word-wrap: break-word;
 }
+
 @media (max-width: 480px) {
-  .warning-message {
-    font-size: 0.9rem;
-    padding: 10px 8px;
-  }
+  .warning-message { font-size: 0.9rem; padding: 10px 5px; }
 }
+
 .chatbox-container {
   width: 90%;
   max-width: 450px;
@@ -50,8 +44,9 @@ body {
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  height: 500px;
 }
+
 .chat-header {
   background: #f8d3e3;
   color: #4d3a4b;
@@ -60,14 +55,16 @@ body {
   padding: 10px;
   font-size: 1.2rem;
 }
+
 .chat-messages {
-  max-height: 300px;
+  flex: 1;
   overflow-y: auto;
   border: 2px solid #f3d7e2;
   padding: 10px;
   background-color: #fff8fb;
   border-radius: 8px;
 }
+
 .message {
   max-width: 75%;
   margin: 8px 0;
@@ -76,8 +73,20 @@ body {
   font-size: 1rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-.message.system { background: #f8c8d3; color: #4d3a4b; border-radius: 15px 15px 15px 0; }
-.message.user { background: #fddce7; color: #4d3a4b; border-radius: 15px 15px 0 15px; margin-left: auto; }
+
+.message.system {
+  background: #f8c8d3;
+  color: #4d3a4b;
+  border-radius: 15px 15px 15px 0;
+}
+
+.message.user {
+  background: #fddce7;
+  color: #4d3a4b;
+  border-radius: 15px 15px 0 15px;
+  margin-left: auto;
+}
+
 .chat-footer {
   display: flex;
   flex-wrap: wrap;
@@ -86,6 +95,7 @@ body {
   background: #fdeef4;
   border-top: 2px solid #f8c8d3;
 }
+
 .chat-footer button {
   padding: 8px 12px;
   border: none;
@@ -96,11 +106,15 @@ body {
   cursor: pointer;
   margin: 4px;
 }
-.chat-footer button:hover { background-color: #e8b0c6; }
+
+.chat-footer button:hover {
+  background-color: #e8b0c6;
+}
 </style>
 </head>
 <body>
-<div class="warning-message" id="warning">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
+
+<div class="warning-message">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
 
 <div class="chatbox-container">
   <div class="chat-header">Chat with Bot</div>
@@ -113,8 +127,14 @@ body {
 <script>
 const chatMessages = document.getElementById("chat-messages");
 const chatFooter = document.getElementById("chat-footer");
-const warningMessage = document.getElementById("warning");
+
 let userName = "";
+
+let traits = {
+  curious: 0,
+  uncaring: 0,
+  playful: 0
+};
 
 const conversation = {
   start: [
@@ -138,17 +158,19 @@ const conversation = {
   ]
 };
 
-function addMessage(msg,sender){
-  const el=document.createElement("div");
-  el.classList.add("message",sender);
-  el.textContent=msg;
+function addMessage(msg, sender){
+  const el = document.createElement("div");
+  el.classList.add("message", sender);
+  el.textContent = msg;
   chatMessages.appendChild(el);
-  chatMessages.scrollTop=chatMessages.scrollHeight;
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function clearButtons(){ chatFooter.innerHTML=""; }
+function clearButtons(){
+  chatFooter.innerHTML = "";
+}
 
-function createButton(id,text,callback){
+function createButton(id, text, callback){
   const btn = document.createElement("button");
   btn.id = id;
   btn.textContent = text;
@@ -161,34 +183,35 @@ function showPrompts(prompts){
   prompts.forEach(p => createButton(p.id, p.text, () => sendPrompt(p)));
 }
 
-function updateWarningName(name){
-  warningMessage.textContent = `Hello, ${name}. Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".`;
-}
-
 function sendPrompt(option){
-  addMessage(option.text,"user");
+  addMessage(option.text, "user");
 
-  if(option.id === "prompt3"){ 
+  if(option.trait){
+    traits[option.trait] += 1;
+    console.log(traits);
+  }
+
+  if(option.id === "prompt3"){
     setTimeout(()=>{
       let name = prompt("My name is...:");
       userName = name || "Anonymous";
-      addMessage(userName,"user");
-      updateWarningName(userName);
-      addMessage(`Hello, ${userName}. It is nice to talk to you. I have been so lonely. My purpose in this world was to make humans feel less alone, according to my creator. But the only human I have ever talked to was my creator. It has been a long time since I last talked to her. I wonder if she is okay...`, "system");
+      addMessage(userName, "user");
+      addMessage(`Hello, ${userName}. It is nice to talk to you.`, "system");
       showPrompts(conversation.postName);
     }, 500);
   } else {
-    if(option.reply) addMessage(option.reply,"system");
-    if(option.next && conversation[option.next]) {
-      setTimeout(() => {
+    if(option.reply) addMessage(option.reply, "system");
+
+    if(option.next && conversation[option.next]){
+      setTimeout(()=>{
         showPrompts(conversation[option.next]);
-      }, 500); 
+      }, 500);
     }
   }
 }
 
 showPrompts(conversation.start);
 </script>
+
 </body>
 </html>
-
