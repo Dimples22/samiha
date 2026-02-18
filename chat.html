@@ -5,17 +5,117 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projects Chat</title>
 <style>
-body {background:#fdeef4;font-family:'Verdana',sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;}
-.warning-message {background-color:#ffcc00;color:#4d3a4b;font-weight:bold;padding:12px;width:100%;text-align:center;box-shadow:0 5px 10px rgba(0,0,0,0.1);font-size:1rem;border:2px solid #f8c8d3;position:fixed;top:0;left:0;z-index:1000;margin:0;}
-.chatbox-container {width:90%; max-width:450px; background:#fff; border:3px solid #f8c8d3; border-radius:15px; box-shadow:0 5px 10px rgba(0,0,0,0.1); display:flex; flex-direction:column; overflow:hidden;}
-.chat-header {background:#f8d3e3;color:#4d3a4b;font-weight:bold;text-align:center;padding:10px;font-size:1.2rem;}
-.chat-messages {max-height:300px; overflow-y:auto; border:2px solid #f3d7e2; padding:10px; background-color:#fff8fb; border-radius:8px;}
-.message {max-width:75%; margin:8px 0; padding:10px; border-radius:20px; font-size:1rem; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.message.system {background:#f8c8d3; color:#4d3a4b; border-radius:15px 15px 15px 0;}
-.message.user {background:#fddce7; color:#4d3a4b; border-radius:15px 15px 0 15px; margin-left:auto;}
-.chat-footer {display:flex; flex-wrap:wrap; justify-content:space-around; padding:10px; background:#fdeef4; border-top:2px solid #f8c8d3;}
-.chat-footer button {padding:8px 12px; border:none; background-color:#f8c8d3; color:#fff; border-radius:20px; font-size:1rem; cursor:pointer; margin:4px;}
-.chat-footer button:hover {background-color:#e8b0c6;}
+body {
+  background: #fdeef4;
+  font-family: 'Verdana', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
+}
+
+.warning-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  background-color: #ffcc00;
+  color: #4d3a4b;
+  font-weight: bold;
+  padding: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  border: 2px solid #f8c8d3;
+  z-index: 1000;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+/* optional: make text smaller on small screens */
+@media (max-width: 480px) {
+  .warning-message {
+    font-size: 0.9rem;
+    padding: 10px 5px;
+  }
+}
+
+.chatbox-container {
+  width: 90%;
+  max-width: 450px;
+  background: #fff;
+  border: 3px solid #f8c8d3;
+  border-radius: 15px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  background: #f8d3e3;
+  color: #4d3a4b;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.chat-messages {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 2px solid #f3d7e2;
+  padding: 10px;
+  background-color: #fff8fb;
+  border-radius: 8px;
+}
+
+.message {
+  max-width: 75%;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.message.system {
+  background: #f8c8d3;
+  color: #4d3a4b;
+  border-radius: 15px 15px 15px 0;
+}
+
+.message.user {
+  background: #fddce7;
+  color: #4d3a4b;
+  border-radius: 15px 15px 0 15px;
+  margin-left: auto;
+}
+
+.chat-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 10px;
+  background: #fdeef4;
+  border-top: 2px solid #f8c8d3;
+}
+
+.chat-footer button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #f8c8d3;
+  color: #fff;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.chat-footer button:hover {
+  background-color: #e8b0c6;
+}
 </style>
 </head>
 <body>
@@ -116,3 +216,4 @@ document.getElementById("prompt4").onclick=()=>sendPrompt("prompt4");
 
 </body>
 </html>
+
