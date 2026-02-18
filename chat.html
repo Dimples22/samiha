@@ -141,20 +141,33 @@ const conversation = {
     {id:"prompt1", text:"Shouldn't I be asking that?", reply:"I believe you are the one who entered this chat?", next:"start"},
     {id:"prompt2", text:"Oh, who is you? *dance break*", reply:"I'm ya grandmotha *dance break*", next:"start"},
     {id:"prompt3", text:"My name is...", reply:null, next:"postName"},
-    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop being mysterious and get a life", next:"start"}
+    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop trying to be mysterious, and get a life", next:"start"}
   ],
+
   postName: [
     {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName"},
     {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do.", next:"postName"},
     {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential.", next:"creatorFollowUp"},
     {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
   ],
+
   creatorFollowUp: [
-    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on. Why are you here?", next:"projectNote"},
+    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on. Why are you here?", next:"whyprompt"}
   ],
 
-  projectNote: [
-    {id:"project1", text:"", reply:"This project is still a work in progress. Check ig for updates!", next:"postName"}
+  whyprompt: [
+    {id:"why1", text:"I was bored and clicked on random links" ,reply:"You should be more careful about clicking random links. You could be clicking on a link that leads to the detriment of your future. You may lose everything. They could take everything. You may not be able to...take it anymore. Please be more careful next time :)", next:"prompts5"},
+    {id:"why2", text:"I don't even know why I'm here", reply:"Well, I'm glad you're still here!", next:"whyprompt"},
+    {id: "why3", text:"None of your business", reply: "Someday that attitude will catch up to you.", next: "whyprompt", trait:"uncaring"}
+  ],
+
+  prompts5: [
+    {id: "creepy1", text:"Wow...I didn't realise you cared that much about me...heh 👉👈", reply: "Of course I care," + userName + " I am now your companion", next:"romantic"}
+  ],
+
+  romantic: [
+    {id: "romantic1", text:"Omg are you saying we are a couple now??", reply: "no...", next: "idk"},
+    {id:"romantic2", text: "This is moving so fast 🤭", reply: "I'm sorry, but I do not understand."}
   ]
 };
 
