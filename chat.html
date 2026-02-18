@@ -92,7 +92,7 @@ body {
 </style>
 </head>
 <body>
-<div class="warning-message">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
+<div class="warning-message" id="warning">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
 
 <div class="chatbox-container">
   <div class="chat-header">Chat with Bot</div>
@@ -105,6 +105,7 @@ body {
 <script>
 const chatMessages = document.getElementById("chat-messages");
 const chatFooter = document.getElementById("chat-footer");
+const warningMessage = document.getElementById("warning");
 let userName = "";
 
 const conversation = {
@@ -112,7 +113,7 @@ const conversation = {
     {id:"prompt1", text:"Shouldn't I be asking that?", reply:"I believe you are the one who entered this chat?", next:"start"},
     {id:"prompt2", text:"Oh, who is you? *dance break*", reply:"I'm ya grandmotha *dance break*", next:"start"},
     {id:"prompt3", text:"My name is...", reply:null, next:"postName"},
-    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop trying to be mysterious, and get a life", next:"start"}
+    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop being mysterious and get a life", next:"start"}
   ],
   postName: [
     {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName"},
@@ -121,7 +122,7 @@ const conversation = {
     {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
   ],
   creatorFollowUp: [
-    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on...", next:"postName"},
+    {id:"creator1", text:"So your creator was also a user?", reply:"Let's move on...", next:"postName"}
   ]
 };
 
@@ -148,6 +149,10 @@ function showPrompts(prompts){
   prompts.forEach(p => createButton(p.id, p.text, () => sendPrompt(p)));
 }
 
+function updateWarningName(name){
+  warningMessage.textContent = `Hello, ${name}. Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".`;
+}
+
 function sendPrompt(option){
   addMessage(option.text,"user");
 
@@ -156,6 +161,7 @@ function sendPrompt(option){
       let name = prompt("My name is...:");
       userName = name || "Anonymous";
       addMessage(userName,"user");
+      updateWarningName(userName);
       addMessage(`Hello, ${userName}. It is nice to talk to you.`, "system");
       showPrompts(conversation.postName);
     }, 500);
@@ -169,4 +175,3 @@ showPrompts(conversation.start);
 </script>
 </body>
 </html>
-
