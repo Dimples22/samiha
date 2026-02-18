@@ -36,7 +36,13 @@
     </a>
   </div>
 </main>
-
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('active');
+  });
+</script>
 
   <footer>
     <p>© 2026 Samiha. All rights reserved.</p>
@@ -44,4 +50,5 @@
 
 </body>
 </html>
+
 
