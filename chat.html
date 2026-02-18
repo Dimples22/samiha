@@ -20,6 +20,9 @@ body {
   top: 0;
   left: 0;
   width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;      
   text-align: center;
   background-color: #ffcc00;
   color: #4d3a4b;
@@ -29,6 +32,7 @@ body {
   border: 2px solid #f8c8d3;
   z-index: 1000;
   font-size: 1rem;
+  box-sizing: border-box;
 }
 @media (max-width: 480px) {
   .warning-message { font-size: 0.9rem; padding: 10px 5px; }
@@ -179,4 +183,5 @@ showPrompts(conversation.start);
 </script>
 </body>
 </html>
+
 
