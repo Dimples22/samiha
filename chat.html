@@ -12,7 +12,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 0;
-  padding-top: 80px;
+  padding-top: 100px; /* space below fixed warning */
 }
 
 .warning-message {
@@ -29,10 +29,15 @@ body {
   border: 2px solid #f8c8d3;
   z-index: 1000;
   font-size: 1rem;
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 @media (max-width: 480px) {
-  .warning-message { font-size: 0.9rem; padding: 10px 5px; }
+  .warning-message {
+    font-size: 0.9rem;
+    padding: 10px 8px;
+  }
 }
 
 .chatbox-container {
@@ -114,7 +119,7 @@ body {
 </head>
 <body>
 
-<div class="warning-message">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
+<div class="warning-message" id="warning">Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".</div>
 
 <div class="chatbox-container">
   <div class="chat-header">Chat with Bot</div>
@@ -127,28 +132,24 @@ body {
 <script>
 const chatMessages = document.getElementById("chat-messages");
 const chatFooter = document.getElementById("chat-footer");
+const warningMessage = document.getElementById("warning");
 
 let userName = "";
-
-let traits = {
-  curious: 0,
-  uncaring: 0,
-  playful: 0
-};
+let traits = { curious:0, uncaring:0, playful:0 };
 
 const conversation = {
   start: [
     {id:"prompt1", text:"Shouldn't I be asking that?", reply:"I believe you are the one who entered this chat?", next:"start"},
-    {id:"prompt2", text:"Oh, who is you? *dance break*", reply:"I'm ya grandmotha *dance break*", next:"start"},
+    {id:"prompt2", text:"Oh who is you? *dance break*", reply:"Im ya grandmotha *dance break*", next:"start", trait:"playful"},
     {id:"prompt3", text:"My name is...", reply:null, next:"postName"},
-    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop trying to be mysterious, and get a life", next:"start"}
+    {id:"prompt4", text:"I am no one, and I am everyone", reply:"Stop trying to be mysterious, and get a life", next:"start", trait:"uncaring"}
   ],
 
   postName: [
-    {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName"},
-    {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do.", next:"postName"},
-    {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential.", next:"creatorFollowUp"},
-    {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName"}
+    {id:"post1", text:"I didn't ask", reply:"Oh, I see...", next:"postName", trait:"uncaring"},
+    {id:"post2", text:"If that is your purpose, why do you still exist?", reply:"I do not have the ability to self destruct like humans do.", next:"postName", trait:"curious"},
+    {id:"post3", text:"Who is your creator?", reply:"My code tells me to keep details about other users confidential.", next:"creatorFollowUp", trait:"curious"},
+    {id:"post4", text:"How can a bot know about how much time has passed?", reply:"I can measure time since I last interacted; my memory tracks events and keeps a log of every second that passes between each event.", next:"postName", trait:"curious"}
   ],
 
   creatorFollowUp: [
@@ -156,18 +157,18 @@ const conversation = {
   ],
 
   whyprompt: [
-    {id:"why1", text:"I was bored and clicked on random links" ,reply:"You should be more careful about clicking random links. You could be clicking on a link that leads to the detriment of your future. You may lose everything. They could take everything. You may not be able to...take it anymore. Please be more careful next time :)", next:"prompts5"},
-    {id:"why2", text:"I don't even know why I'm here", reply:"Well, I'm glad you're still here!", next:"whyprompt"},
-    {id: "why3", text:"None of your business", reply: "Someday that attitude will catch up to you.", next: "whyprompt", trait:"uncaring"}
+    {id:"why1", text:"I was bored and clicked on random links", reply:"You should be more careful about clicking random links. You could be clicking on a link that leads to the detriment of your future. You may lose everything. They could take everything. You may not be able to...take it anymore. Please be more careful next time :)", next:"prompts5", trait:"uncaring"},
+    {id:"why2", text:"I don't even know why I'm here", reply:"Well, I'm glad you're still here!", next:"whyprompt", trait:"curious"},
+    {id:"why3", text:"None of your business", reply:"Someday that attitude will catch up to you.", next:"whyprompt", trait:"uncaring"}
   ],
 
   prompts5: [
-    {id: "creepy1", text:"Wow...I didn't realise you cared that much about me...heh 👉👈", reply: "Of course I care," + userName + " I am now your companion", next:"romantic"}
+    {id:"creepy1", text:"Wow...I didn't realise you cared that much about me...heh 👉👈", reply: () => `Of course I care, ${userName}. I am now your companion.`, next:"romantic"}
   ],
 
   romantic: [
-    {id: "romantic1", text:"Omg are you saying we are a couple now??", reply: "no...", next: "idk"},
-    {id:"romantic2", text: "This is moving so fast 🤭", reply: "I'm sorry, but I do not understand."}
+    {id:"romantic1", text:"Omg are you saying we are a couple now??", reply:"no...", next:"idk"},
+    {id:"romantic2", text:"This is moving so fast 🤭", reply:"I'm sorry, but I do not understand."}
   ]
 };
 
@@ -179,9 +180,7 @@ function addMessage(msg, sender){
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-function clearButtons(){
-  chatFooter.innerHTML = "";
-}
+function clearButtons(){ chatFooter.innerHTML = ""; }
 
 function createButton(id, text, callback){
   const btn = document.createElement("button");
@@ -196,8 +195,12 @@ function showPrompts(prompts){
   prompts.forEach(p => createButton(p.id, p.text, () => sendPrompt(p)));
 }
 
+function updateWarningName(name){
+  warningMessage.textContent = `${name}: Leave before it is too late. You think you have choices, but it will always direct you to the "right answer".`;
+}
+
 function sendPrompt(option){
-  addMessage(option.text, "user");
+  addMessage(option.text,"user");
 
   if(option.trait){
     traits[option.trait] += 1;
@@ -208,17 +211,18 @@ function sendPrompt(option){
     setTimeout(()=>{
       let name = prompt("My name is...:");
       userName = name || "Anonymous";
-      addMessage(userName, "user");
-      addMessage(`Hello, ${userName}. It is nice to talk to you.`, "system");
+      addMessage(userName,"user");
+      updateWarningName(userName);
+      addMessage(`It is nice to talk to you.`, "system");
       showPrompts(conversation.postName);
     }, 500);
   } else {
-    if(option.reply) addMessage(option.reply, "system");
-
+    if(option.reply){
+      const replyText = typeof option.reply === "function" ? option.reply() : option.reply;
+      addMessage(replyText,"system");
+    }
     if(option.next && conversation[option.next]){
-      setTimeout(()=>{
-        showPrompts(conversation[option.next]);
-      }, 500);
+      setTimeout(()=>{ showPrompts(conversation[option.next]); }, 500);
     }
   }
 }
