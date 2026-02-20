@@ -1,0 +1,261 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #fff;
+}
+
+header {
+  background-color: #1e1e1e;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav button {
+  padding: 8px 15px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+nav button:hover {
+  background-color: #555;
+}
+
+#content {
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-bar input,
+.search-bar select,
+.search-bar button {
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+}
+
+.search-bar input,
+.search-bar select {
+  flex: 1 1 200px;
+}
+
+.search-bar button {
+  background-color: #1E4A2E;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-bar button:hover {
+  background-color: #16602a;
+}
+
+#searchResults,
+#content.flex-games {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.game {
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 180px;
+  flex: 0 0 auto;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.game img {
+  width: 100%;
+  display: block;
+  border-bottom: 1px solid #333;
+}
+
+.game p {
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.review-container {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  font-size: 2rem;
+}
+
+.star-rating label {
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.star-rating label.hover,
+.star-rating label.selected {
+  color: #FFD700;
+}
+
+.review-container textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  width: 100%;
+  background-color: #222;
+  color: #fff;
+}
+
+.review-container button {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #1E4A2E;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-end;
+}
+
+.review-container button:hover {
+  background-color: #16602a;
+}
+
+#reviews,
+.user-reviews-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.review-card {
+  background-color: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  width: 220px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.review-card img {
+  width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.review-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.review-card p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+}
+
+.review-card small {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.review-actions button {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #555;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.review-actions button:hover {
+  background-color: #777;
+}
+
+@media (max-width: 600px) {
+  .search-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .game,
+  .review-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
