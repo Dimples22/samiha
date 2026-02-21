@@ -121,10 +121,11 @@ function showReviews() {
   function normalizeText(text) {
   return text
     .toLowerCase()
-    .normalize("NFD")             
-    .replace(/[\u0300-\u036f]/g, ""); 
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
 
-function applyFilters() {
+  function applyFilters() {
   const sort = document.getElementById("sortSelect").value;
   const franchiseInput = document.getElementById("franchiseInput").value;
 
@@ -283,4 +284,5 @@ function getReviews(gameId) {
 
 //START 
 showHome();
+
 
