@@ -118,35 +118,47 @@ function showReviews() {
     });
   }
 
-  function applyFilters() {
-    let filtered = [...reviews];
+  function normalizeText(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")             
+    .replace(/[\u0300-\u036f]/g, ""); 
 
-    const sort = document.getElementById("sortSelect").value;
-    const franchise = document.getElementById("franchiseInput").value.toLowerCase();
+function applyFilters() {
+  const sort = document.getElementById("sortSelect").value;
+  const franchiseInput = document.getElementById("franchiseInput").value;
 
-    // FILTER
-    if (franchise) {
-      filtered = filtered.filter(r =>
-        r.name.toLowerCase().includes(franchise)
-      );
-    }
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-    // SORT
-    if (sort === "new") {
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
-    }
-    if (sort === "old") {
-      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
-    if (sort === "high") {
-      filtered.sort((a, b) => b.rating - a.rating);
-    }
-    if (sort === "low") {
-      filtered.sort((a, b) => a.rating - b.rating);
-    }
+  //Filter
+  if (franchiseInput) {
+    const search = normalizeText(franchiseInput);
 
-    renderReviews(filtered);
+    reviews = reviews.filter(r =>
+      normalizeText(r.name).includes(search)
+    );
   }
+
+  //Sort
+  if (sort === "new") {
+    reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  if (sort === "old") {
+    reviews.sort((a, b) => new Date(a.date) - new Date(b.date));
+  }
+
+  if (sort === "high") {
+    reviews.sort((a, b) => b.rating - a.rating);
+  }
+
+  if (sort === "low") {
+    reviews.sort((a, b) => a.rating - b.rating);
+  }
+
+  renderReviews(reviews);
+}
+
 
   document.getElementById("applyFilters").onclick = applyFilters;
 
@@ -271,3 +283,4 @@ function getReviews(gameId) {
 
 //START 
 showHome();
+
