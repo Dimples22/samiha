@@ -247,6 +247,20 @@ nav button:hover {
   background-color: #777;
 }
 
+.review-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.review-controls input,
+.review-controls select,
+.review-controls button {
+  padding: 8px;
+}
+
+
 @media (max-width: 600px) {
   .search-bar {
     flex-direction: column;

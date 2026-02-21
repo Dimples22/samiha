@@ -2,7 +2,7 @@ const content = document.getElementById("content");
 let currentGame = null;
 let platforms = [];
 
-//Fetch Platforms
+//Fetch Platforms 
 async function getPlatforms() {
   try {
     const res = await fetch('https://api.rawg.io/api/platforms?key=74dd4139e83a4b979485dcccc545c8d8');
@@ -14,13 +14,13 @@ async function getPlatforms() {
 }
 getPlatforms();
 
-//NAV
+//NAV 
 function showHome() {
   content.innerHTML = `
     <h2>Welcome to GameBoxd</h2>
     <p>Use the navigation above to search for games or view your reviews.</p>
-    <p> The current rating system uses 5 stars, no half stars.</p>
-    <p> Your reviews should save on your browser/device.</p>
+    <p>The current rating system uses 5 stars.</p>
+    <p>Your reviews are saved on your device.</p>
   `;
 }
 
@@ -38,61 +38,122 @@ function showSearch() {
   `;
 }
 
+//REVIEWS PAGE 
 function showReviews() {
-  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-  content.innerHTML = "<h2>Your Reviews</h2>";
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
-  if (!reviews.length) {
-    content.innerHTML += "<p>You haven't added any reviews yet.</p>";
-    return;
+  content.innerHTML = `
+    <h2>Your Reviews</h2>
+
+    <div class="review-controls">
+      <select id="sortSelect">
+        <option value="new">Newest</option>
+        <option value="old">Oldest</option>
+        <option value="high">Highest Rated</option>
+        <option value="low">Lowest Rated</option>
+      </select>
+
+      <input id="franchiseInput" placeholder="Filter by franchise (e.g. Pokemon)" />
+      <button id="applyFilters">Apply</button>
+    </div>
+
+    <div class="user-reviews-flex" id="reviewsContainer"></div>
+  `;
+
+  const container = document.getElementById("reviewsContainer");
+
+  function formatDate(date) {
+    const d = new Date(date);
+    return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
   }
 
-  const flexDiv = document.createElement("div");
-  flexDiv.className = "user-reviews-flex";
+  function renderReviews(list) {
+    container.innerHTML = "";
 
-  reviews.forEach((r, index) => {
-    const div = document.createElement("div");
-    div.className = "review-card";
+    if (!list.length) {
+      container.innerHTML = "<p>No matching reviews</p>";
+      return;
+    }
 
-    const dateObj = new Date(r.date);
-    const formattedDate = `${dateObj.getDate()}/${dateObj.getMonth() + 1}/${dateObj.getFullYear()}`;
+    list.forEach((r, index) => {
+      const div = document.createElement("div");
+      div.className = "review-card";
 
-    div.innerHTML = `
-      <img src="${r.image || ''}" alt="${r.name}">
-      <h3>${r.name}</h3>
-      <p>⭐ ${r.rating}</p>
-      <p>${r.text}</p>
-      <small>${formattedDate}</small>
-      <div class="review-actions">
-        <button class="edit-btn">Edit</button>
-        <button class="delete-btn">Delete</button>
-      </div>
-    `;
+      div.innerHTML = `
+        <img src="${r.image || ''}" alt="${r.name}">
+        <h3>${r.name}</h3>
+        <p>⭐ ${r.rating}</p>
+        <p>${r.text}</p>
+        <small>${formatDate(r.date)}</small>
+        <div class="review-actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      `;
 
-    div.querySelector(".edit-btn").onclick = () => {
-      openGame({ id: r.gameId, name: r.name, background_image: r.image });
-      document.getElementById("review").value = r.text;
-      selectedRating = r.rating;
-      highlightStars(selectedRating);
-      reviews.splice(index, 1);
-      localStorage.setItem("reviews", JSON.stringify(reviews));
-    };
+      // EDIT
+      div.querySelector(".edit-btn").onclick = () => {
+        openGame({ id: r.gameId, name: r.name, background_image: r.image });
 
-    div.querySelector(".delete-btn").onclick = () => {
-      if (confirm("Delete this review?")) {
+        setTimeout(() => {
+          document.getElementById("review").value = r.text;
+          selectedRating = r.rating;
+          highlightStars(selectedRating);
+        }, 50);
+
         reviews.splice(index, 1);
         localStorage.setItem("reviews", JSON.stringify(reviews));
-        showReviews();
-      }
-    };
+      };
 
-    flexDiv.appendChild(div);
-  });
+      // DELETE
+      div.querySelector(".delete-btn").onclick = () => {
+        if (confirm("Delete this review?")) {
+          reviews.splice(index, 1);
+          localStorage.setItem("reviews", JSON.stringify(reviews));
+          showReviews();
+        }
+      };
 
-  content.appendChild(flexDiv);
+      container.appendChild(div);
+    });
+  }
+
+  function applyFilters() {
+    let filtered = [...reviews];
+
+    const sort = document.getElementById("sortSelect").value;
+    const franchise = document.getElementById("franchiseInput").value.toLowerCase();
+
+    // FILTER
+    if (franchise) {
+      filtered = filtered.filter(r =>
+        r.name.toLowerCase().includes(franchise)
+      );
+    }
+
+    // SORT
+    if (sort === "new") {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    }
+    if (sort === "old") {
+      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+    if (sort === "high") {
+      filtered.sort((a, b) => b.rating - a.rating);
+    }
+    if (sort === "low") {
+      filtered.sort((a, b) => a.rating - b.rating);
+    }
+
+    renderReviews(filtered);
+  }
+
+  document.getElementById("applyFilters").onclick = applyFilters;
+
+  applyFilters();
 }
 
-//Search Games 
+//SEARCH 
 async function searchGames() {
   const query = document.getElementById("searchInput").value.trim();
   const platform = document.getElementById("platformSelect").value;
@@ -124,11 +185,11 @@ async function searchGames() {
     });
   } catch (err) {
     console.error(err);
-    content.innerHTML = "<p>Failed to fetch games. Try again later.</p>";
+    content.innerHTML = "<p>Failed to fetch games.</p>";
   }
 }
 
-//Open Game 
+//OPEN GAME 
 let selectedRating = 0;
 
 function openGame(game) {
@@ -136,7 +197,7 @@ function openGame(game) {
 
   content.innerHTML = `
     <h2>${game.name}</h2>
-    <img src="${game.background_image || ''}" width="300" alt="${game.name}">
+    <img src="${game.background_image || ''}" width="300">
     <div class="review-container">
       <div class="star-rating" id="star-rating"></div>
       <textarea id="review" placeholder="Write a review..."></textarea>
@@ -146,46 +207,46 @@ function openGame(game) {
   `;
 
   const starContainer = document.getElementById("star-rating");
-  starContainer.innerHTML = "";
 
   for (let i = 1; i <= 5; i++) {
-    const label = document.createElement("label");
-    label.textContent = "★";
-    label.dataset.value = i;
+    const star = document.createElement("label");
+    star.textContent = "★";
+    star.dataset.value = i;
 
-    label.addEventListener("mouseenter", () => highlightStars(i));
-    label.addEventListener("mouseleave", () => highlightStars(selectedRating));
-    label.addEventListener("click", () => {
+    star.addEventListener("mouseenter", () => highlightStars(i));
+    star.addEventListener("mouseleave", () => highlightStars(selectedRating));
+    star.addEventListener("click", () => {
       selectedRating = i;
       highlightStars(selectedRating);
     });
 
-    starContainer.appendChild(label);
+    starContainer.appendChild(star);
   }
 
-  function highlightStars(rating) {
+  window.highlightStars = function (rating) {
     Array.from(starContainer.children).forEach(star => {
       star.classList.toggle("selected", star.dataset.value <= rating);
     });
-  }
+  };
 
   highlightStars(selectedRating);
 
   const reviews = getReviews(game.id);
   const reviewsDiv = document.getElementById("reviews");
+
   reviewsDiv.innerHTML = reviews.length
     ? reviews.map(r => {
         const d = new Date(r.date);
-        const formatted = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-        return `<p>⭐ ${r.rating} - ${r.text} <small>${formatted}</small></p>`;
+        return `<p>⭐ ${r.rating} - ${r.text} <small>${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}</small></p>`;
       }).join("")
     : "<p>No reviews yet</p>";
 
   document.getElementById("save-review-btn").onclick = () => {
     const text = document.getElementById("review").value.trim();
-    if (!selectedRating || !text) return alert("Please select a rating and write a review.");
+    if (!selectedRating || !text) return alert("Add rating and review");
 
     const allReviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
     allReviews.push({
       gameId: game.id,
       name: game.name,
@@ -194,16 +255,19 @@ function openGame(game) {
       text,
       date: new Date()
     });
-    localStorage.setItem("reviews", JSON.stringify(allReviews));
-    selectedRating = 0;
 
+    localStorage.setItem("reviews", JSON.stringify(allReviews));
+
+    selectedRating = 0;
     openGame(game);
   };
 }
 
+//GET REVIEWS 
 function getReviews(gameId) {
   const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
   return reviews.filter(r => r.gameId === gameId);
 }
 
+//START 
 showHome();
