@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MiniSpace Social</title>
+<title>MiniSpace</title>
 <style>
 body { margin:0; font-family:Verdana,sans-serif; background:#fdeef4; display:flex; flex-direction:column; height:100vh; }
 #app { display:none; flex:1; }
@@ -26,7 +26,7 @@ input, textarea, select { width:100%; margin-top:5px; padding:6px; }
 </head>
 <body>
 
-<header>MiniSpace Social</header>
+<header>MiniSpace</header>
 
 <div id="auth" style="padding:20px; max-width:400px; margin:auto;">
 <h3>Login / Sign Up</h3>
@@ -35,6 +35,7 @@ input, textarea, select { width:100%; margin-top:5px; padding:6px; }
 <button id="signupBtn">Sign Up</button>
 <button id="loginBtn">Login</button>
 <button id="googleBtn">Sign in with Google</button>
+<button id="resetPwdBtn">Forgot Password?</button>
 </div>
 
 <div id="app">
@@ -101,7 +102,7 @@ input, textarea, select { width:100%; margin-top:5px; padding:6px; }
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, updateDoc, addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, getDocs, where, getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -123,6 +124,15 @@ signupBtn.onclick = () => createUserWithEmailAndPassword(auth,email.value,passwo
 loginBtn.onclick = () => signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
 googleBtn.onclick = () => signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>alert(e.message));
 logoutBtn.onclick = () => signOut(auth);
+
+// Password reset
+resetPwdBtn.onclick = () => {
+  const emailAddr = email.value.trim();
+  if(!emailAddr) return alert("Enter your email first!");
+  sendPasswordResetEmail(auth,emailAddr)
+    .then(()=>alert("Password reset email sent!"))
+    .catch(e=>alert(e.message));
+};
 
 // Navigation
 navFeed.onclick = ()=>showSection('feed');
