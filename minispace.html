@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniSpace Social</title>
+<style>
+body { margin:0; font-family:Verdana,sans-serif; background:#fdeef4; display:flex; flex-direction:column; height:100vh; }
+#app { display:none; flex:1; }
+header { background:#f8d3e3; padding:10px 20px; text-align:center; font-weight:bold; font-size:1.5rem; color:#4d3a4b; }
+main { display:flex; flex:1; overflow:hidden; }
+.sidebar, .rightbar { flex-basis: 20%; background:#fff7f0; border:1px solid #f3d7e2; border-radius:10px; margin:10px; padding:10px; display:flex; flex-direction:column; gap:10px; overflow-y:auto; }
+.content { flex:1; display:flex; flex-direction:column; gap:10px; overflow-y:auto; padding:10px; }
+.post-card, .user-card { background:#fff; border-radius:12px; padding:12px; box-shadow:0 3px 6px rgba(0,0,0,0.1); transition: transform 0.1s; }
+.post-card:hover, .user-card:hover { transform: scale(1.01); }
+button { padding:6px 12px; border:none; border-radius:6px; background:#f8c8d3; color:#4d3a4b; cursor:pointer; margin-top:5px; }
+button:hover { background:#fde0f0; }
+.bottom-nav { display:flex; justify-content:space-around; padding:8px; background:#f8d3e3; border-top:2px solid #f3d7e2; }
+.modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; }
+.modal-content { background:#fff7f0; border-radius:10px; padding:20px; width:90%; max-width:400px; position:relative; }
+.closeBtn { position:absolute; top:10px; right:15px; font-size:20px; font-weight:bold; cursor:pointer; }
+input, textarea, select { width:100%; margin-top:5px; padding:6px; }
+.floating-btn { position:fixed; bottom:70px; right:20px; background:#f8c8d3; border:none; border-radius:50%; width:56px; height:56px; font-size:28px; display:flex; justify-content:center; align-items:center; cursor:pointer; box-shadow:0 3px 6px rgba(0,0,0,0.2); }
+@media(max-width:768px){ main { flex-direction:column; } .sidebar, .rightbar { flex-basis:auto; width:95%; margin:5px auto; } }
+</style>
+</head>
+<body>
+
+<header>MiniSpace Social</header>
+
+<div id="auth" style="padding:20px; max-width:400px; margin:auto;">
+<h3>Login / Sign Up</h3>
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button id="signupBtn">Sign Up</button>
+<button id="loginBtn">Login</button>
+<button id="googleBtn">Sign in with Google</button>
+</div>
+
+<div id="app">
+<main>
+  <div class="sidebar">
+    <h4>Profile</h4>
+    <input id="username" placeholder="Username">
+    <button id="saveUsernameBtn">Save Username</button>
+    <button id="mbtiBtn">Personality Quiz</button>
+    <button id="songBtn">Set Favorite Song</button>
+    <button id="logoutBtn">Logout</button>
+    <div id="badges"></div>
+  </div>
+
+  <div class="content">
+    <h4>Feed</h4>
+    <div id="posts"></div>
+  </div>
+
+  <div class="rightbar">
+    <h4>Trending Users</h4>
+    <div id="trending"></div>
+  </div>
+</main>
+
+<button class="floating-btn" id="createPostBtn">+</button>
+
+<!-- Modals -->
+<div id="mbtiModal" class="modal">
+  <div class="modal-content">
+    <span class="closeBtn" id="closeMBTI">&times;</span>
+    <h3>MBTI Quiz</h3>
+    <label>I/E:</label><select id="q1"><option>I</option><option>E</option></select>
+    <label>N/S:</label><select id="q2"><option>N</option><option>S</option></select>
+    <label>F/T:</label><select id="q3"><option>F</option><option>T</option></select>
+    <label>J/P:</label><select id="q4"><option>J</option><option>P</option></select>
+    <button id="saveMBTI">Save Personality</button>
+  </div>
+</div>
+
+<div id="songModal" class="modal">
+  <div class="modal-content">
+    <span class="closeBtn" id="closeSong">&times;</span>
+    <h3>Favorite Song</h3>
+    <input id="songInput" placeholder="Song URL">
+    <button id="saveSongBtn">Save</button>
+  </div>
+</div>
+
+<div id="postModal" class="modal">
+  <div class="modal-content">
+    <span class="closeBtn" id="closePost">&times;</span>
+    <h3>Create Post</h3>
+    <textarea id="postInput" placeholder="Write something..."></textarea>
+    <button id="submitPostBtn">Post</button>
+  </div>
+</div>
+
+<div class="bottom-nav">
+  <button id="navFeed">Feed</button>
+  <button id="navProfile">Profile</button>
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, updateDoc, addDoc, collection, serverTimestamp, onSnapshot, query, orderBy, getDocs, where, getDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAoN3nyDKxmVf3M7cD3w1KCUg1RKmj5RwU",
+  authDomain: "social-e672e.firebaseapp.com",
+  projectId: "social-e672e",
+  storageBucket: "social-e672e.firebasestorage.app",
+  messagingSenderId: "57293914487",
+  appId: "1:57293914487:web:0db14327cdf36670a96172"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let currentUser = null;
+
+// Auth
+signupBtn.onclick = () => createUserWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
+loginBtn.onclick = () => signInWithEmailAndPassword(auth,email.value,password.value).catch(e=>alert(e.message));
+googleBtn.onclick = () => signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>alert(e.message));
+logoutBtn.onclick = () => signOut(auth);
+
+// Navigation
+navFeed.onclick = ()=>showSection('feed');
+navProfile.onclick = ()=>showSection('profile');
+createPostBtn.onclick = ()=>openModal('postModal');
+
+// Modals
+function openModal(id){ document.getElementById(id).style.display='flex'; }
+function closeModal(id){ document.getElementById(id).style.display='none'; }
+closeMBTI.onclick = ()=>closeModal('mbtiModal');
+closeSong.onclick = ()=>closeModal('songModal');
+closePost.onclick = ()=>closeModal('postModal');
+
+// Save username
+saveUsernameBtn.onclick = async()=>{
+  const name = username.value.trim();
+  if(!name) return alert("Username required!");
+  const q = query(collection(db,'users'), where('username','==',name));
+  const snap = await getDocs(q);
+  if(!snap.empty && snap.docs[0].id!==currentUser.uid) return alert("Username taken!");
+  await updateDoc(doc(db,'users',currentUser.uid), { username: name });
+  alert("Username saved!");
+};
+
+// MBTI
+mbtiBtn.onclick = async()=>{
+  const snap = await getDoc(doc(db,'users',currentUser.uid));
+  const username = snap.exists() ? snap.data().username : '';
+  if(!username) return alert("Set username first!");
+  openModal('mbtiModal');
+};
+saveMBTI.onclick = async()=>{
+  const mbti = q1.value+q2.value+q3.value+q4.value;
+  await updateDoc(doc(db,'users',currentUser.uid),{personality:mbti});
+  alert("Personality saved!");
+  closeModal('mbtiModal');
+};
+
+// Favorite song
+songBtn.onclick = async()=>{
+  const snap = await getDoc(doc(db,'users',currentUser.uid));
+  const username = snap.exists() ? snap.data().username : '';
+  if(!username) return alert("Set username first!");
+  openModal('songModal');
+};
+saveSongBtn.onclick = async()=>{
+  await updateDoc(doc(db,'users',currentUser.uid),{song:songInput.value});
+  alert("Song saved!");
+  closeModal('songModal');
+};
+
+// Create post
+submitPostBtn.onclick = async()=>{
+  const snap = await getDoc(doc(db,'users',currentUser.uid));
+  const username = snap.exists() ? snap.data().username : '';
+  if(!username) return alert("Set username first!");
+  const text = postInput.value.trim();
+  if(text.length<1 || text.length>500) return alert("Post 1-500 chars");
+  if(!currentUser) return alert("Login required!");
+  await addDoc(collection(db,'posts'),{
+    uid: currentUser.uid,
+    text,
+    likes:0,
+    created: serverTimestamp()
+  });
+  postInput.value='';
+  closeModal('postModal');
+};
+
+// Auth state
+onAuthStateChanged(auth,user=>{
+  currentUser=user;
+  if(user){
+    auth.style.display='none';
+    app.style.display='flex';
+    initUser();
+    loadPosts();
+    loadTrending();
+  }else{
+    auth.style.display='block';
+    app.style.display='none';
+  }
+});
+
+// Initialize user
+async function initUser(){
+  const snap = await getDoc(doc(db,'users',currentUser.uid));
+  if(!snap.exists()){
+    await setDoc(doc(db,'users',currentUser.uid),{
+      username:"",
+      personality:"",
+      song:"",
+      email:currentUser.email,
+      isAdmin:false
+    });
+  }
+}
+
+// Load posts
+function loadPosts(){
+  const q=query(collection(db,'posts'),orderBy('created','desc'));
+  onSnapshot(q,snap=>{
+    posts.innerHTML='';
+    snap.docs.forEach(async d=>{
+      const data=d.data();
+      const uSnap=await getDoc(doc(db,'users',data.uid));
+      const uname=uSnap.exists()?uSnap.data().username||"User":"User";
+      const personality=uSnap.exists()?uSnap.data().personality||'':'';
+      const song=uSnap.exists()?uSnap.data().song||'':'';
+      const div=document.createElement('div');
+      div.className='post-card';
+      div.innerHTML=`<b>${uname} ${personality?`[${personality}]`:''}</b><br>${song?`<small>Song: <a href='${song}' target='_blank'>Listen</a></small><br>`:''}<p>${data.text}</p><small>Likes: ${data.likes}</small><br><button onclick="likePost('${d.id}',${data.likes})">Like</button>`;
+      posts.appendChild(div);
+    });
+  });
+}
+
+// Trending users
+async function loadTrending(){
+  const q=query(collection(db,'users'),orderBy('username'));
+  onSnapshot(q,snap=>{
+    trending.innerHTML='';
+    snap.docs.forEach(d=>{
+      const u=d.data();
+      if(u.username) trending.innerHTML+=`<div class="user-card">${u.username} ${u.personality?`[${u.personality}]`:''}</div>`;
+    });
+  });
+}
+
+// Like
+window.likePost = async(id,likes)=>{
+  if(!currentUser) return;
+  await updateDoc(doc(db,'posts',id),{likes:likes+1});
+};
+
+function showSection(sec){
+  document.querySelector('.content').style.display = sec==='feed'?'block':'none';
+  document.querySelector('.sidebar').style.display = sec==='profile'?'flex':'none';
+}
+</script>
+</body>
+</html>
