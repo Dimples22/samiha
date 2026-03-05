@@ -299,10 +299,9 @@ footer {
 }
 
 .banner-section {
-  position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column; 
+  align-items: center;    
 }
 
 .banner-video {
@@ -310,7 +309,6 @@ footer {
   max-width: 800px;
   height: auto;
   display: block;
-  margin: 0 auto;
   border-radius: 8px;
 }
 
@@ -322,8 +320,7 @@ footer {
   padding: 15px 30px;
   border-radius: 50px;
   text-align: center;
-  display: inline-block;
-  margin: 20px auto 40px; 
+  margin-top: 20px;  
 }
 
 .photobook {
@@ -422,6 +419,7 @@ footer {
   background: var(--accent-lavender);
   color: var(--dark-bg);
 }
+
 
 
 
