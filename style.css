@@ -314,10 +314,10 @@ footer {
 
 .category-message {
   font-family: 'Fredoka One', cursive; 
-  font-size: 2rem;
+  font-size: 1.5rem; 
   color: #fff;
   background: rgba(255, 182, 193, 0.7); 
-  padding: 15px 30px;
+  padding: 10px 20px; 
   border-radius: 50px;
   text-align: center;
   margin-top: 20px;  
@@ -419,6 +419,7 @@ footer {
   background: var(--accent-lavender);
   color: var(--dark-bg);
 }
+
 
 
 
