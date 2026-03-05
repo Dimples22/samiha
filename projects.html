@@ -21,6 +21,7 @@
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="blog.html">Blog</a></li>
+        <li><a href="photos.html">Photobook</a></li>
       </ul>
     </div>
   </nav>
@@ -39,5 +40,19 @@
     <p>© 2026 Samiha. All rights reserved.</p>
   </footer>
 
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (navToggle && navLinks) {
+      navToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+      });
+    }
+  });
+  </script>
+
 </body>
 </html>
+
