@@ -2,40 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Photos</title>
+  <title>Photobook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
 
   <style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: black;
-  }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+    }
 
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-    padding-top: 80px; 
-  }
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 9999;
+    }
 
-  .fullscreen-video {
-    max-width: 100%;
-    max-height: calc(100vh - 80px);
-    width: auto;
-    height: auto;
-  }
+    .nav-links {
+      z-index: 10000;
+    }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 10;
-  }
-</style>
+    .content {
+      padding-top: 80px; 
+      text-align: center;
+    }
+
+    .fullscreen-video {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+    }
+  </style>
 </head>
+
 <body>
 
   <nav class="nav">
@@ -58,29 +59,29 @@
     </div>
   </nav>
 
-  <video 
-    class="fullscreen-video" 
-    src="videos/photobook.mp4" 
-    autoplay 
-    loop 
-    muted 
-    playsinline>
-  </video>
+  <div class="content">
+    <video 
+      class="fullscreen-video" 
+      src="videos/photobook.mp4" 
+      autoplay 
+      loop 
+      muted 
+      playsinline>
+    </video>
+  </div>
 
   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navToggle = document.querySelector(".nav-toggle");
-    const navLinks = document.querySelector(".nav-links");
+    document.addEventListener("DOMContentLoaded", function () {
+      const navToggle = document.querySelector(".nav-toggle");
+      const navLinks = document.querySelector(".nav-links");
 
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
-      });
-    }
-  });
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", function () {
+          navLinks.classList.toggle("active");
+        });
+      }
+    });
   </script>
 
-
 </body>
-
 </html>
