@@ -27,32 +27,36 @@
   </nav>
 
   <main class="section">
-    <h1>My Projects</h1>
-    <div class="projects-container">
-      <a href="chat.html" class="project-card"> A chatbot story </a>
-    </div>
-    <div class="projects-container">
-      <a href="gameboxd/gameboxd.html" class="project-card"> Gameboxd </a>
-    </div>
-  </main>
+  <h1 class="category-message">My Projects</h1>
+  
+  <div class="projects-container">
+    <a href="chat.html" class="project-card">
+      <div>
+        <strong>A Chatbot Story: Demo</strong>
+        <p>You surf websites and find this chatroom with some kind of sentient AI bot. This project is a mystery text-simulator style game with different endings. Not being worked on currently.</p>
+      </div>
+    </a>
+
+    <a href="gameboxd/gameboxd.html" class="project-card">
+      <div>
+        <strong>Gameboxd</strong>
+        <p>This is pretty much Letterboxd for gamers. Features are basic: you can log reviews but currently cannot interact with other people.</p>
+      </div>
+    </a>
+  </div>
+</main>
 
   <footer>
     <p>© 2026 Samiha. All rights reserved.</p>
   </footer>
 
-  <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const navToggle = document.querySelector(".nav-toggle");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (navToggle && navLinks) {
-      navToggle.addEventListener("click", function () {
-        navLinks.classList.toggle("active");
-      });
-    }
+ <script>
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('active');
   });
-  </script>
+ </script>
 
 </body>
 </html>
-
