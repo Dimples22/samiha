@@ -126,7 +126,7 @@
         An overview of my experience with my mental health.
       </p>
       <p><small>Published 12 Mar 2026</small></p>
-      <a href="my-brain.html" class="article-btn">Read article</a>
+      <a href="#" class="article-btn" onclick="checkBrainPassword(event)">Read article</a>
     </div>
 
      <div class="article-card personal">
@@ -172,11 +172,20 @@
         document.querySelector(".categories button.active")
       );
     });
+    function checkBrainPassword(event) {
+    event.preventDefault();
+    const password = prompt("Enter password (hint: it's in my book)");
+
+    if (password === "NANU") {
+      window.location.href = "my-brain.html";
+    } else if (password !== null) {
+      alert("Incorrect password.");
+    }
+   }
   </script>
 
 </body>
 </html>
-
 
 
 
