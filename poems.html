@@ -71,7 +71,6 @@
       color: var(--accent-pink);
     }
 
-
     .nav {
       background: var(--dark-gray);
       position: sticky;
@@ -166,12 +165,11 @@
       margin-bottom: 45px;
     }
 
-
     .poem-card {
       background: var(--dark-gray);
       border: 1px solid var(--accent-lavender);
       border-radius: 30px;
-      padding: 55px 55px;
+      padding: 55px;
       box-shadow: 0 15px 35px var(--shadow);
 
       transition:
@@ -243,7 +241,6 @@
       transform: scale(0.96);
     }
 
-
     footer {
       background: var(--dark-gray);
       color: var(--text-light);
@@ -257,6 +254,7 @@
       font-size: var(--fs-sm);
       margin: 0;
     }
+
 
     @media (max-width: 768px) {
 
@@ -332,7 +330,6 @@
   </style>
 </head>
 
-
 <body>
 
   <nav class="nav">
@@ -342,7 +339,7 @@
         Poems
       </div>
 
-      <<ul class="nav-links">
+      <ul class="nav-links" id="navLinks">
         <li><a href="index.html#about">About</a></li>
         <li><a href="index.html#book">Book</a></li>
         <li><a href="index.html#contact">Contact</a></li>
@@ -354,6 +351,7 @@
         id="navToggle"
         aria-label="Open navigation"
         aria-expanded="false"
+        type="button"
       >
         <span></span>
         <span></span>
@@ -362,7 +360,6 @@
 
     </div>
   </nav>
-
 
   <main>
 
@@ -377,7 +374,6 @@
         <h1>
           Poems
         </h1>
-
 
         <div class="poem-card" id="poemCard">
 
@@ -394,7 +390,6 @@
           </div>
 
         </div>
-
 
         <div class="poetry-controls">
 
@@ -428,7 +423,6 @@
 
   <script>
     const poems = [
-
       {
         title: "The Meadow",
 
@@ -508,7 +502,6 @@ some things are meant to flourish where they grow,
 and answer to the earth from whence they came.`
       },
 
-
       {
         title: "Elixir",
 
@@ -583,43 +576,25 @@ beside the rapture waiting at the end of them—
 
 the one draught for which I would bleed once more.`
       }
-
     ];
-
 
     let currentPoem = 0;
 
-    const poemCard =
-      document.getElementById("poemCard");
+    const poemCard = document.getElementById("poemCard");
+    const poemTitle = document.getElementById("poemTitle");
+    const poemText = document.getElementById("poemText");
+    const poemNumber = document.getElementById("poemNumber");
 
-    const poemTitle =
-      document.getElementById("poemTitle");
-
-    const poemText =
-      document.getElementById("poemText");
-
-    const poemNumber =
-      document.getElementById("poemNumber");
-
-    const nextButton =
-      document.getElementById("nextPoem");
-
-    const previousButton =
-      document.getElementById("prevPoem");
+    const nextButton = document.getElementById("nextPoem");
+    const previousButton = document.getElementById("prevPoem");
 
     function displayPoem() {
-
       poemCard.style.opacity = "0";
       poemCard.style.transform = "translateY(8px)";
 
       setTimeout(() => {
-
-        poemTitle.textContent =
-          poems[currentPoem].title;
-
-        poemText.textContent =
-          poems[currentPoem].text;
-
+        poemTitle.textContent = poems[currentPoem].title;
+        poemText.textContent = poems[currentPoem].text;
         poemNumber.textContent =
           `${currentPoem + 1} / ${poems.length}`;
 
@@ -630,12 +605,10 @@ the one draught for which I would bleed once more.`
           top: 0,
           behavior: "smooth"
         });
-
       }, 200);
     }
 
     nextButton.addEventListener("click", () => {
-
       currentPoem++;
 
       if (currentPoem >= poems.length) {
@@ -643,11 +616,9 @@ the one draught for which I would bleed once more.`
       }
 
       displayPoem();
-
     });
 
     previousButton.addEventListener("click", () => {
-
       currentPoem--;
 
       if (currentPoem < 0) {
@@ -655,29 +626,43 @@ the one draught for which I would bleed once more.`
       }
 
       displayPoem();
-
     });
 
-    const navToggle =
-      document.getElementById("navToggle");
 
-    const navLinks =
-      document.getElementById("navLinks");
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
 
     navToggle.addEventListener("click", () => {
-
-      const isOpen =
-        navLinks.classList.toggle("active");
+      const isOpen = navLinks.classList.toggle("active");
 
       navToggle.setAttribute(
         "aria-expanded",
         isOpen
       );
 
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation" : "Open navigation"
+      );
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+
+        navToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        navToggle.setAttribute(
+          "aria-label",
+          "Open navigation"
+        );
+      });
     });
 
     document.addEventListener("keydown", (event) => {
-
       if (event.key === "ArrowRight") {
         nextButton.click();
       }
@@ -685,13 +670,10 @@ the one draught for which I would bleed once more.`
       if (event.key === "ArrowLeft") {
         previousButton.click();
       }
-
     });
 
     displayPoem();
-
   </script>
 
 </body>
-
 </html>
