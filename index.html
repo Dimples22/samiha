@@ -3,19 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>The Simulacrum | Samiha</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
+
 <body>
 
 <header class="hero section">
   <div class="grid">
     <div class="hero-content" style="grid-column: span 12;">
-      <h1>Hello. I'm Samiha</h1>
+      <h1>Hello. I'm Samiha.</h1>
       <p>Author of <span class="highlight">The Simulacrum</span></p>
     </div>
   </div>
@@ -24,11 +28,13 @@
 <nav class="nav">
   <div class="nav-container">
     <div class="logo">Samiha</div>
+
     <button class="nav-toggle" aria-label="Toggle navigation">
       <span></span>
       <span></span>
       <span></span>
     </button>
+
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#book">Book</a></li>
@@ -39,65 +45,134 @@
 </nav>
 
 <main>
-
+  
   <section id="about" class="section card">
     <div class="grid">
       <div style="grid-column: span 12;">
         <h2>About Me</h2>
         <p>
-          I get bored and do things.
+          I made this website for fun! 
         </p>
       </div>
     </div>
   </section>
 
+
   <section id="book" class="section card">
     <div class="grid">
+
       <div style="grid-column: span 12;">
         <h2>My Book</h2>
       </div>
+
       <div class="book-card" style="grid-column: span 12;">
-        <img src="images/book-cover.png" alt="The Simulacrum book cover">
+
+        <img
+          src="images/book-cover.png"
+          alt="The Simulacrum book cover"
+        >
+
         <div class="book-info">
+
           <h3>The Simulacrum</h3>
+
           <p>
-            The Simulacrum belongs to the genre of autofiction, which means I get to fictionalise my life for entertainment purposes.
+            <em>The Simulacrum</em> is an autofiction novel about dealing with trauma and how it affects relationships and other human experience. The style is inspired by classic literature. If you have read "No Longer Human", I think you would enjoy this book!
           </p>
-          <a href="https://amzn.eu/d/03SiYKFx" class="btn" target="_blank" rel="noopener">Buy Now</a>
+
+          <a
+            href="https://amzn.eu/d/03SiYKFx"
+            class="btn"
+            target="_blank"
+            rel="noopener"
+          >
+            View the Book
+          </a>
+
         </div>
       </div>
+
     </div>
   </section>
 
   <section id="contact" class="section card">
     <div class="grid">
+
       <div style="grid-column: span 12;">
+
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:ssamiha.h24@outlook.com">ssamiha.h24@outlook.com</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/sami_ha707/" target="_blank" rel="noopener">sami_ha707</a></p>
+
+        <p>
+          For enquiries, collaborations:
+        </p>
+
+        <p>
+          Email:
+          <a href="mailto:ssamiha.h24@outlook.com">
+            ssamiha.h24@outlook.com
+          </a>
+        </p>
+
+        <p>
+          Instagram:
+          <a
+            href="https://www.instagram.com/sami_ha707/"
+            target="_blank"
+            rel="noopener"
+          >
+            @sami_ha707
+          </a>
+        </p>
+
       </div>
+
     </div>
   </section>
 
- <section id="support" class="section card">
-  <div class="grid">
-    <div style="grid-column: span 12;">
-      <h2>Support Me</h2>
-      <p>If you enjoy my work and want to support me, you can give me money for fun. </p>
-      <a href="https://buymeacoffee.com/samiha.org" target="_blank" class="support-btn">☕ Buy Me a Coffee</a>
+
+  <!-- Support -->
+  <section id="support" class="section card">
+    <div class="grid">
+
+      <div style="grid-column: span 12;">
+
+        <h2>Support My Work</h2>
+
+        <p>
+          If you've enjoyed my writing or projects and would like to support
+          what I make, you can buy me a coffee.
+        </p>
+
+        <p>
+          It's entirely optional, but always appreciated.
+        </p>
+
+        <a
+          href="https://buymeacoffee.com/samiha.org"
+          class="support-btn"
+          target="_blank"
+          rel="noopener"
+        >
+          ☕ Buy Me a Coffee
+        </a>
+
+      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
 </main>
+
 
 <footer>
   <p>© 2026 Samiha. All rights reserved.</p>
 </footer>
 
+
 <script>
   const toggle = document.querySelector('.nav-toggle');
   const links = document.querySelector('.nav-links');
+
   toggle.addEventListener('click', () => {
     links.classList.toggle('active');
   });
@@ -105,6 +180,3 @@
 
 </body>
 </html>
-
-
-
