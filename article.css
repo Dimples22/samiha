@@ -267,3 +267,110 @@
   background: var(--accent);
   color: #fff !important;
 }
+
+.article-ornament {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  padding: 14px 12px;
+  background: linear-gradient(
+    110deg,
+    #e9e4ff,
+    #dceaff,
+    #f5e2f2
+  );
+  border-radius: 8px;
+  color: #7165b5;
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.article-ornament.bottom {
+  margin-top: 3rem;
+  margin-bottom: 0;
+}
+
+
+.article-divider {
+  margin: 2.3rem auto;
+  color: #9180c9;
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+
+
+.article-emphasis {
+  color: #7165b5;
+  font-weight: 700;
+}
+
+.article-emphasis.blue {
+  color: #306bac;
+}
+
+.article-emphasis.pink {
+  color: #bd6f9c;
+}
+
+.article-emphasis.lilac {
+  color: #9180c9;
+}
+
+
+
+.article-note {
+  margin: 2rem 0;
+  padding: 1rem 1.3rem;
+  border-left: 3px solid #918ef4;
+  background: #f4f1ff;
+  color: #514b78;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.article-note p {
+  margin: 0;
+  color: inherit;
+}
+
+
+.article h2::after {
+  content: " ୨୧";
+  color: #918ef4;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+
+
+.article ::selection {
+  background: #dcd5ff;
+  color: #292044;
+}
+
+
+@media (max-width: 480px) {
+  .article-ornament {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 11px 8px;
+  }
+
+  .article-divider {
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin: 1.8rem auto;
+  }
+
+  .article-note {
+    padding: 0.85rem 1rem;
+  }
+}
