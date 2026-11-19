@@ -23,12 +23,13 @@
       --dark-bg: #2C2C2C;
       --dark-gray: #3A3A3A;
       --text-light: #E4E4E4;
+      --text-muted: #A8A8A8;
 
       --accent-cyan: #A8DADC;
       --accent-pink: #FFC1CC;
       --accent-lavender: #B39CD0;
 
-      --shadow: rgba(0,0,0,0.5);
+      --shadow: rgba(0, 0, 0, 0.5);
       --border: #555;
 
       --transition-speed: 0.3s;
@@ -71,6 +72,7 @@
       color: var(--accent-pink);
     }
 
+    /* Navigation */
     .nav {
       background: var(--dark-gray);
       position: sticky;
@@ -123,8 +125,8 @@
       display: none;
       flex-direction: column;
       justify-content: space-between;
-      width: 25px;
-      height: 20px;
+      width: 28px;
+      height: 22px;
       background: none;
       border: none;
       cursor: pointer;
@@ -138,17 +140,17 @@
       border-radius: 2px;
     }
 
-
+    /* Poetry Section */
     .poetry-section {
       min-height: calc(100vh - 61px);
-      padding: 80px 20px;
+      padding: 64px 20px;
       display: flex;
       justify-content: center;
     }
 
     .poetry-container {
       width: 100%;
-      max-width: 850px;
+      max-width: 920px;
       margin: 0 auto;
       text-align: center;
     }
@@ -162,67 +164,71 @@
     }
 
     .poetry-container > h1 {
-      margin-bottom: 45px;
+      margin-bottom: 36px;
     }
 
     .poem-card {
       background: var(--dark-gray);
       border: 1px solid var(--accent-lavender);
-      border-radius: 30px;
-      padding: 55px;
+      border-radius: 28px;
+      padding: 52px 56px;
       box-shadow: 0 15px 35px var(--shadow);
-
       transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity 0.22s ease,
+        transform 0.22s ease;
     }
 
     .poem-number {
-      color: #999;
+      color: var(--text-muted);
       font-size: 0.8rem;
       letter-spacing: 0.12em;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
 
     #poemTitle {
       color: var(--accent-lavender);
-      margin-bottom: 40px;
-      font-size: 1.8rem;
+      margin-bottom: 36px;
+      font-size: 1.85rem;
     }
 
+
     .poem-text {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto;
       text-align: left;
     }
 
-    .poem-text p {
-      margin: 0;
+    .poem-text .stanza {
+      margin: 0 0 1.55em 0;
       color: var(--text-light);
-      font-size: 1.05rem;
-      line-height: 1.9;
-      white-space: pre-line;
+      font-size: 1.06rem;
+      line-height: 1.55;
       font-weight: 400;
+      overflow-wrap: break-word;
+    }
+
+    .poem-text .stanza:last-child {
+      margin-bottom: 0;
     }
 
     .poetry-controls {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 12px;
-      margin-top: 25px;
+      gap: 14px;
+      margin-top: 28px;
     }
 
     .poem-btn {
-      padding: 12px 22px;
+      min-height: 44px;
+      padding: 12px 24px;
       border: 1px solid var(--border);
       border-radius: 50px;
       background: var(--dark-gray);
       color: var(--text-light);
       font-family: inherit;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       cursor: pointer;
-
       transition:
         background var(--transition-speed),
         color var(--transition-speed),
@@ -255,9 +261,8 @@
       margin: 0;
     }
 
-
+    /* Tablet & Mobile */
     @media (max-width: 768px) {
-
       .nav-container {
         grid-template-columns: auto auto;
         justify-content: space-between;
@@ -267,15 +272,12 @@
         display: none;
         grid-auto-flow: row;
         gap: 10px;
-
         background: var(--dark-gray);
         position: absolute;
         top: 60px;
         right: 20px;
-
         width: 180px;
         padding: 10px;
-
         border-radius: 10px;
         box-shadow: 0 10px 25px var(--shadow);
       }
@@ -289,42 +291,50 @@
       }
 
       .poetry-section {
-        padding: 55px 18px;
+        padding: 40px 14px;
       }
 
       .poem-card {
-        padding: 40px 25px;
-        border-radius: 25px;
+        padding: 36px 22px;
+        border-radius: 22px;
       }
 
       #poemTitle {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
+        font-size: 1.55rem;
+        margin-bottom: 28px;
       }
 
-      .poem-text p {
+      .poem-text .stanza {
         font-size: 1rem;
-        line-height: 1.85;
+        line-height: 1.5;
+        margin-bottom: 1.45em;
       }
     }
 
+  
     @media (max-width: 480px) {
-
       .poetry-section {
-        padding: 40px 15px;
+        padding: 28px 10px;
       }
 
       .poem-card {
-        padding: 35px 20px;
+        padding: 30px 16px;
+        border-radius: 18px;
+      }
+
+      .poem-text .stanza {
+        font-size: 0.96rem;
+        line-height: 1.48;
+        margin-bottom: 1.35em;
       }
 
       .poetry-controls {
-        gap: 8px;
+        gap: 10px;
       }
 
       .poem-btn {
-        padding: 11px 16px;
-        font-size: 0.85rem;
+        padding: 11px 18px;
+        font-size: 0.88rem;
       }
     }
   </style>
@@ -334,7 +344,6 @@
 
   <nav class="nav">
     <div class="nav-container">
-
       <div class="logo">
         Poems
       </div>
@@ -351,32 +360,22 @@
         id="navToggle"
         aria-label="Open navigation"
         aria-expanded="false"
-        type="button"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
-
     </div>
   </nav>
 
   <main>
-
     <section class="poetry-section">
-
       <div class="poetry-container">
-
         <p class="poetry-label">
-          MY WRITING
+          MY POEMS
         </p>
 
-        <h1>
-          Poems
-        </h1>
-
         <div class="poem-card" id="poemCard">
-
           <p class="poem-number" id="poemNumber">
             1 / 2
           </p>
@@ -385,14 +384,10 @@
             The Meadow
           </h2>
 
-          <div class="poem-text">
-            <p id="poemText"></p>
-          </div>
-
+          <div class="poem-text" id="poemText"></div>
         </div>
 
         <div class="poetry-controls">
-
           <button
             class="poem-btn"
             id="prevPoem"
@@ -408,13 +403,9 @@
           >
             next →
           </button>
-
         </div>
-
       </div>
-
     </section>
-
   </main>
 
   <footer>
@@ -425,156 +416,108 @@
     const poems = [
       {
         title: "The Meadow",
-
-        text: `In summer, when the meadow wears its bloom,
-
-with buttercups and foxglove bells, one hand
-
-stoops to where a solitary flower sways,
-
-still jewelled with rain, and lifts it from the land.
-
-
-It is brought home and set within a vase,
-
-and praised for all the beauty it has borne;
-
-yet beauty does not perish when it's gone—
-
-the meadow carries flowering on till morn.
-
-
-Yet the hand, having plucked one, could not pass another.
-
-Another catches light beyond the hedge;
-
-another, blue as twilight, fills the gloom;
-
-another bends its gold above the sedge.
-
-
-So one by one the meadow yields its own,
-
-each lovely thing made lovely to be seen—
-
-until the hand, which would not leave alone,
-
-has emptied half the summer from the green.
-
-
-For what is beautiful is not the flower by itself:
-
-it is the root drinking deep beneath the earth,
-
-the rain beaded along its slender leaves,
-
-the wind that sets each petal trembling into life,
-
-the sun that ripens colour through its veins,
-
-the dark loam that feeds the blossom from beneath.
-
-
-A severed flower may keep its colour for a while,
-
-may stand in water, seemingly unchanged;
-
-yet something has already perished at the root—
-
-the living earth that gave its beauty birth.
-
-
-Perhaps it is enough to remain
-
-upon the path, and let the blossoms be;
-
-to watch them bow beneath the summer rain,
-
-then lift their faces to the evening breeze.
-
-
-For not every flower is meant to go
-
-home in the hand that reaches out to claim;
-
-some things are meant to flourish where they grow,
-
-and answer to the earth from whence they came.`
+        stanzas: [
+          [
+            "In summer, when the meadow wears its bloom,",
+            "with buttercups and foxglove bells, one hand",
+            "stoops to where a solitary flower sways,",
+            "still jewelled with rain, and lifts it from the land."
+          ],
+          [
+            "It is brought home and set within a vase,",
+            "and praised for all the beauty it has borne;",
+            "yet beauty does not perish when it's gone—",
+            "the meadow carries flowering on till morn."
+          ],
+          [
+            "Yet the hand, having plucked one, could not pass another.",
+            "Another catches light beyond the hedge;",
+            "another, blue as twilight, fills the gloom;",
+            "another bends its gold above the sedge."
+          ],
+          [
+            "So one by one the meadow yields its own,",
+            "each lovely thing made lovely to be seen—",
+            "until the hand, which would not leave alone,",
+            "has emptied half the summer from the green."
+          ],
+          [
+            "For what is beautiful is not the flower by itself:",
+            "it is the root drinking deep beneath the earth,",
+            "the rain beaded along its slender leaves,",
+            "the wind that sets each petal trembling into life,",
+            "the sun that ripens colour through its veins,",
+            "the dark loam that feeds the blossom from beneath."
+          ],
+          [
+            "A severed flower may keep its colour for a while,",
+            "may stand in water, seemingly unchanged;",
+            "yet something has already perished at the root—",
+            "the living earth that gave its beauty birth."
+          ],
+          [
+            "Perhaps it is enough to remain",
+            "upon the path, and let the blossoms be;",
+            "to watch them bow beneath the summer rain,",
+            "then lift their faces to the evening breeze."
+          ],
+          [
+            "For not every flower is meant to go",
+            "home in the hand that reaches out to claim;",
+            "some things are meant to flourish where they grow,",
+            "and answer to the earth from whence they came."
+          ]
+        ]
       },
-
       {
         title: "Elixir",
-
-        text: `In this desert, even a cactus becomes interesting
-
-for a little while beneath the vacant sky;
-
-a crooked thing, austere and green, will hold the eye
-
-when there is little else to break the monotony.
-
-
-They prick, of course, and sometimes draw the blood,
-
-but what are thorns amid so much sand?
-
-And here I am, searching for a water source.
-
-Not for the first cool draught that chance might offer,
-
-nor for some sweetness another draught could bestow,
-
-but for that elixir which has no likeness,
-
-whose very thought makes every other pleasure pale.
-
-
-To taste the impending doom
-
-of your elixir
-
-and find it sweeter
-
-for knowing what it will take from me.
-
-
-To feel it upon the tongue,
-
-its sweetness opening slowly through the mouth,
-
-until the breath itself is steeped in it;
-
-to find, mingled with its sweetness, the first touch of doom,
-
-so intimately joined that neither
-
-could be separated from the other.
-
-
-It is not salvation that I seek,
-
-nor even the end of thirst,
-
-but that exquisite moment before surrender,
-
-when the wanting becomes almost unbearable—
-
-when what has haunted the mouth for so long
-
-is at last poised upon the lips.
-
-
-So let the thorns draw blood. Let the desert blister
-
-the soles of feet already worn and sore.
-
-Let them prick me once, and then a hundred times;
-
-what are their small wounds, their sting, their score,
-
-beside the rapture waiting at the end of them—
-
-the one draught for which I would bleed once more.`
+        stanzas: [
+          [
+            "In this desert, even a cactus becomes interesting",
+            "for a little while beneath the vacant sky;",
+            "a crooked thing, austere and green, will hold the eye",
+            "when there is little else to break the monotony."
+          ],
+          [
+            "They prick, of course, and sometimes draw the blood,",
+            "but what are thorns amid so much sand?",
+            "And here I am, searching for a water source.",
+            "Not for the first cool draught that chance might offer,",
+            "nor for some sweetness another draught could bestow,",
+            "but for that elixir which has no likeness,",
+            "whose very thought makes every other pleasure pale."
+          ],
+          [
+            "To taste the impending doom",
+            "of your elixir",
+            "and find it sweeter",
+            "for knowing what it will take from me."
+          ],
+          [
+            "To feel it upon the tongue,",
+            "its sweetness opening slowly through the mouth,",
+            "until the breath itself is steeped in it;",
+            "to find, mingled with its sweetness, the first touch of doom,",
+            "so intimately joined that neither",
+            "could be separated from the other."
+          ],
+          [
+            "It is not salvation that I seek,",
+            "nor even the end of thirst,",
+            "but that exquisite moment before surrender,",
+            "when the wanting becomes almost unbearable—",
+            "when what has haunted the mouth for so long",
+            "is at last poised upon the lips."
+          ],
+          [
+            "So let the thorns draw blood. Let the desert blister",
+            "the soles of feet already worn and sore.",
+            "Let them prick me once, and then a hundred times;",
+            "what are their small wounds, their sting, their score,",
+            "beside the rapture waiting at the end of them—",
+            "the one draught for which I would bleed once more."
+          ]
+        ]
       }
     ];
 
@@ -584,82 +527,65 @@ the one draught for which I would bleed once more.`
     const poemTitle = document.getElementById("poemTitle");
     const poemText = document.getElementById("poemText");
     const poemNumber = document.getElementById("poemNumber");
-
     const nextButton = document.getElementById("nextPoem");
     const previousButton = document.getElementById("prevPoem");
 
-    function displayPoem() {
+    function renderStanzas(stanzas) {
+      poemText.innerHTML = "";
+
+      stanzas.forEach((lines) => {
+        const p = document.createElement("p");
+        p.className = "stanza";
+
+        lines.forEach((line, index) => {
+          p.appendChild(document.createTextNode(line));
+          if (index < lines.length - 1) {
+            p.appendChild(document.createElement("br"));
+          }
+        });
+
+        poemText.appendChild(p);
+      });
+    }
+
+    function displayPoem(shouldScroll = false) {
       poemCard.style.opacity = "0";
       poemCard.style.transform = "translateY(8px)";
 
       setTimeout(() => {
-        poemTitle.textContent = poems[currentPoem].title;
-        poemText.textContent = poems[currentPoem].text;
-        poemNumber.textContent =
-          `${currentPoem + 1} / ${poems.length}`;
+        const poem = poems[currentPoem];
+        poemTitle.textContent = poem.title;
+        renderStanzas(poem.stanzas);
+        poemNumber.textContent = `${currentPoem + 1} / ${poems.length}`;
 
         poemCard.style.opacity = "1";
         poemCard.style.transform = "translateY(0)";
 
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
+        if (shouldScroll) {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+        }
       }, 200);
     }
 
     nextButton.addEventListener("click", () => {
-      currentPoem++;
-
-      if (currentPoem >= poems.length) {
-        currentPoem = 0;
-      }
-
-      displayPoem();
+      currentPoem = (currentPoem + 1) % poems.length;
+      displayPoem(true);
     });
 
     previousButton.addEventListener("click", () => {
-      currentPoem--;
-
-      if (currentPoem < 0) {
-        currentPoem = poems.length - 1;
-      }
-
-      displayPoem();
+      currentPoem = (currentPoem - 1 + poems.length) % poems.length;
+      displayPoem(true);
     });
-
 
     const navToggle = document.getElementById("navToggle");
     const navLinks = document.getElementById("navLinks");
 
     navToggle.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("active");
-
-      navToggle.setAttribute(
-        "aria-expanded",
-        isOpen
-      );
-
-      navToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
-      );
-    });
-
-    navLinks.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-
-        navToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-        navToggle.setAttribute(
-          "aria-label",
-          "Open navigation"
-        );
-      });
+      navToggle.setAttribute("aria-expanded", isOpen);
     });
 
     document.addEventListener("keydown", (event) => {
@@ -672,7 +598,7 @@ the one draught for which I would bleed once more.`
       }
     });
 
-    displayPoem();
+    displayPoem(false);
   </script>
 
 </body>
